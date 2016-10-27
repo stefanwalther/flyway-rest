@@ -26,5 +26,4 @@ describe( 'integration:basic', () => {
       .set( 'Accept', 'application/json' )
       .expect( 200, done );
   } );
-
 } );
