@@ -1,16 +1,16 @@
 {
-  "name": "boilerplate-es6",
+  "name": "flyway-rest",
   "version": "0.2.6",
-  "description": "boilerplate-es6 is a template for your es6 based projects using",
+  "description": "REST interface for flyway.",
   "keywords": [
     "es6",
     "gulp",
     "ecma2015",
     "boilerplate"
   ],
-  "homepage": "https://github.com/stefanwalther/boilerplate-es6",
+  "homepage": "https://github.com/stefanwalther/flyway-rest",
   "bugs": {
-    "url": "https://github.com/stefanwalther/boilerplate-es6/issues"
+    "url": "https://github.com/stefanwalther/flyway-rest/issues"
   },
   "license": "MIT",
   "author": {
@@ -22,7 +22,7 @@
     "/dist"
   ],
   "main": "/dist/index.js",
-  "repository": "stefanwalther/boilerplate-es6",
+  "repository": "stefanwalther/flyway-rest",
   "scripts": {
     "build": "gulp build",
     "coverage": "babel-node ./node_modules/.bin/isparta cover _mocha",
