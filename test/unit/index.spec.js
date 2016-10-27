@@ -1,20 +1,18 @@
 /*global describe, expect, it, beforeEach*/
-import { PersonIndex } from './../../src/PersonIndex';
+import appServer from './../../src/app-server';
 
-describe( 'unit:Person', () => {
+describe( 'unit:appServer', () => {
 
-  let idx;
+  let appInst = null;
   beforeEach( () => {
-    idx = new PersonIndex();
+    appInst = new appServer();
   } );
 
-  it( 'should have a property person', () => {
-    expect( idx.person ).to.exist;
-    expect( idx.person ).to.be.an( 'object' );
+  it( 'should have a method `start`', ()=> {
+    expect( appInst ).to.have.a.property( 'start' ).that.is.a.function;
   } );
 
-  it( 'should have a property fullName', () => {
-    expect( idx.person ).to.have.a.property( 'fullName', 'Stefan Walther' );
+  it( 'should have a method `stop`', ()=> {
+    expect( appInst ).to.have.a.property( 'stop' ).that.is.a.function;
   } );
-
 } );
