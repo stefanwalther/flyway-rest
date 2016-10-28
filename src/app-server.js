@@ -13,7 +13,7 @@ export default class appServer {
 
   init() {
     this.expressApp = express();
-    // 3rd party middleware
+
     this.expressApp.use( cors( {
       exposedHeaders: defaultConfig.corsHeaders
     } ) );
