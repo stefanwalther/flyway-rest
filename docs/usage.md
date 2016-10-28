@@ -1,21 +1,21 @@
 
 **Post parameters** 
 
-- `mode` - The execution mode. The following values are possible:
+- **`mode`** - The execution mode. The following values are possible:
   - `simulation` - Does not 
   - `sync` - Executes the command synchronously and returns the result
   - `async` - Executes the command, but returns immediately a result
-- `flyway_args` - Flyway arguments as used in ["Flyway Command-line"](https://flywaydb.org/documentation/commandline/)
-- `callback_url` - 
+- **`flyway_args`** - Flyway arguments as used in ["Flyway Command-line"](https://flywaydb.org/documentation/commandline/)
+- **`callback_url`** - 
 
 **Result**
 
-- `status` - Status of the operation. Can have the following values:  
+- **`status`** - Status of the operation. Can have the following values:  
   - `OK` - Everything OK.
   - `Error` - An error occurred, see `error` for more details.
-- `mode` - The execution mode as passed in.
-- `cmd` - The CLI command as generated, based on the input arguments.
-- `error`
+- **`mode`** - The execution mode as passed in.
+- **`cmd`** - The CLI command as generated, based on the input arguments.
+- **`error`**
   - `message`
   - `details`
 
