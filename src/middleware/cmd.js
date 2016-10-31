@@ -17,8 +17,24 @@ export function exec() {
 
 }
 
-export function buildCommand( args ) {
-  return `flyway `;
+export function buildCommand( flyWayArgs, command = 'info' ) {
+
+  if ( !flyWayArgs || (typeof flyWayArgs === 'object' && Object.keys( flyWayArgs ).length < 1) ) {
+    throw new Error( 'No Flyway args defined.' );
+  }
+
+  if ( [ 'clean', 'info', 'validate', 'baseline', 'repair', 'migrate' ].indexOf( command ) <= -1 ) {
+    throw new Error( 'Invalid Flyway command', command );
+  }
+
+  var space = ' ';
+  var cmd = 'flyway';
+  for ( const key of Object.keys(flyWayArgs) ) {
+      cmd += space + '--' + key + space + flyWayArgs[key];
+  }
+  cmd += space + command;
+  return cmd;
+
 }
 
 

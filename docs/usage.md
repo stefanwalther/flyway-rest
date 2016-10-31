@@ -2,9 +2,10 @@
 **Post parameters** 
 
 - **`mode`** - The execution mode. The following values are possible:
-  - `simulation` - Does not 
+  - `simulation` - Does not execute the command, just returns the generated command (see `cmd` in the result).
   - `sync` - Executes the command synchronously and returns the result
   - `async` - Executes the command, but returns immediately a result
+- **`command` - 
 - **`flyway_args`** - Flyway arguments as used in ["Flyway Command-line"](https://flywaydb.org/documentation/commandline/)
 - **`callback_url`** - 
 
