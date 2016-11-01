@@ -1,6 +1,6 @@
 {
   "name": "flyway-rest",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "REST interface for flyway.",
   "keywords": [
     "flyway",
