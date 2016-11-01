@@ -1,0 +1,12 @@
+version: '2'
+services:
+  flyway_rest:
+    container_name: 'flyway-rest'
+    build: .
+    environment:
+      - PORT=9001
+    ports:
+      - "9001:9001"
+    command: "npm run start"
+# Attach
+#    tty: true

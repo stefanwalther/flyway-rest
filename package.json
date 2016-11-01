@@ -19,11 +19,11 @@
   "files": [
     "/dist"
   ],
-  "main": "/dist/index.js",
+  "main": "./dist/index.js",
   "repository": "stefanwalther/flyway-rest",
   "scripts": {
     "build": "gulp build",
-    "start": "gulp build && node ./index.js",
+    "start": "gulp build && node ./dist/index.js",
     "coverage": "babel-node ./node_modules/.bin/isparta cover _mocha",
     "docs": "verb",
     "lint": "eslint src",
