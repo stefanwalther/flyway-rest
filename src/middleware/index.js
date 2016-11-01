@@ -22,17 +22,6 @@ export default ( config ) => {
     });
   } );
 
-  //Todo: simplify
-  //routes.get( '/help', ( req, res ) => {
-  //  execa.shell( 'flyway' )
-  //    .then( ( result ) => {
-  //      return res.sendStatus( { result } )
-  //    } )
-  //    .catch( ( err ) => {
-  //      return res.sendStatus( { err } )
-  //    } )
-  //} );
-
   routes.get('/', (req, res) => {
     console.log('fetching default');
     res.sendStatus(200);

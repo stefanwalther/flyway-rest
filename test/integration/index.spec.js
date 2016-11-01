@@ -3,57 +3,83 @@ import supertest from 'supertest';
 import express from 'express';
 import http from 'http';
 
-describe( 'integration:basic', ( suite ) => {
+describe( 'integration-tests', ( ) => {
 
   var server = null;
   const FLYWAY_REST_PORT = process.env.FLYWAY_REST_PORT || 9001;
-  const FLYWAY_REST_HOST = process.env.FLYWAY_REST_HOST || 'flyway_rest_service';
+  const FLYWAY_REST_HOST = process.env.FLYWAY_REST_HOST || 'localhost';
 
   beforeEach( () => {
     server = supertest.agent( `http://${FLYWAY_REST_HOST}:${FLYWAY_REST_PORT}` );
   } );
 
-  it.only( 'can ping the REST service (/)', ( done ) => {
+  describe('general setup', () => {
+    it( 'can ping the REST service (/)', ( done ) => {
 
-    let options = {
-      host: FLYWAY_REST_HOST,
-      port: FLYWAY_REST_PORT,
-      path: '/'
-    };
+      let options = {
+        host: FLYWAY_REST_HOST,
+        port: FLYWAY_REST_PORT,
+        path: '/'
+      };
 
-    http
-      .get( options, function( res ) {
-        if ( res.statusCode == 200 ) {
-          done();
-        }
-      } ).on( 'error', function( e ) {
-      done( e );
+      http
+        .get( options, function( res ) {
+          if ( res.statusCode == 200 ) {
+            done();
+          }
+        } ).on( 'error', function( e ) {
+        done( e );
+      } );
     } );
 
-  } );
+    it( '/ should return some general pkg information', ( done ) => {
+      server
+        .get( '/' )
+        .set( 'Accept', 'application/json' )
+        .expect( 200, done );
+    } );
 
-  it.only( '/ should return some general pkg information', ( done ) => {
-    server
-      .get( '/' )
-      .set( 'Accept', 'application/json' )
-      .expect( 200, done );
-  } );
+  });
 
-  //it( 'should return help', ( done ) => {
-  //  request( server.expressApp )
-  //    .get( '/help' )
-  //    .set( 'Accept', 'application/json' )
-  //    .expect( 200 )
-  //    .end( function( err, res ) {
-  //      console.log( 'result: ', res );
-  //      done();
-  //    } );
-  //} );
+  describe('endpoints', () => {
+    it( 'should container endpoint `clean`', () => {
+      server
+        .get( '/clean' )
+        .expect( 200 )
+    } );
 
-  describe( 'migrate', ()=> {
+    it( 'should container endpoint `info`', () => {
+      server
+        .get( '/info' )
+        .expect( 200 )
+    } );
+
+    it( 'should container endpoint `validate`', () => {
+      server
+        .get( '/validate' )
+        .expect( 200 )
+    } );
+
+    it( 'should container endpoint `baseline`', () => {
+      server
+        .get( '/baseline' )
+        .expect( 200 )
+    } );
+
+    it( 'should container endpoint `repair`', () => {
+      server
+        .get( '/repair' )
+        .expect( 200 )
+    } );
+  });
+
+
+
+
+  describe( '/migrate', ()=> {
 
     it( 'should fail without any parameters', ( done ) => {
-      request( server.expressApp )
+      server
         .post( '/migrate' )
         .set( 'Content-Type', 'application/json' )
         .expect( 500 )
@@ -68,7 +94,7 @@ describe( 'integration:basic', ( suite ) => {
     } );
 
     it( 'should return the correct mode `simulation`', ( done ) => {
-      request( server.expressApp )
+      server
         .post( '/migrate' )
         .send( {
           mode: "simulation",
@@ -89,33 +115,4 @@ describe( 'integration:basic', ( suite ) => {
 
   } );
 
-  it( 'should container endpoint `clean`', () => {
-    request( server.expressApp )
-      .get( '/clean' )
-      .expect( 200 )
-  } );
-
-  it( 'should container endpoint `info`', () => {
-    request( server.expressApp )
-      .get( '/info' )
-      .expect( 200 )
-  } );
-
-  it( 'should container endpoint `validate`', () => {
-    request( server.expressApp )
-      .get( '/validate' )
-      .expect( 200 )
-  } );
-
-  it( 'should container endpoint `baseline`', () => {
-    request( server.expressApp )
-      .get( '/baseline' )
-      .expect( 200 )
-  } );
-
-  it( 'should container endpoint `repair`', () => {
-    request( server.expressApp )
-      .get( '/repair' )
-      .expect( 200 )
-  } );
 } );
