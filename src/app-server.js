@@ -1,9 +1,7 @@
-import http from 'http';
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import middleware from './middleware';
-import api from './api';
 import defaultConfig from './config.json';
 
 export default class appServer {
@@ -29,6 +27,7 @@ export default class appServer {
   start( done ) {
     if ( !this.server ) {
       let port = process.env.PORT || defaultConfig.port;
+      console.log( 'env.port', process.env.PORT );
       this.server = this.expressApp.listen( port, ( err ) => {
         if ( !err ) {
           console.log( `Started on port ${port}.` );
@@ -43,9 +42,9 @@ export default class appServer {
 
   }
 
-  stop( ) {
+  stop() {
     if ( this.server ) {
-      return this.server.close(  );
+      return this.server.close();
     }
   }
 

@@ -19,7 +19,7 @@ describe( 'cli:buildCommand', ()=> {
     expect( cmd.buildCommand( { url: 'foo' }, 'baseline' ) ).to.be.equal( 'flyway --url foo baseline' );
     expect( cmd.buildCommand( { url: 'foo' }, 'repair' ) ).to.be.equal( 'flyway --url foo repair' );
     expect( cmd.buildCommand( { url: 'foo' }, 'migrate' ) ).to.be.equal( 'flyway --url foo migrate' );
-    expect( cmd.buildCommand.bind( null, { url: 'foo' }, 'bar' ) ).to.throw( 'Invalid Flyway command' );
+    expect( cmd.buildCommand.bind( null, { url: 'foo' }, 'bar' ) ).to.throw( 'Invalid Flyway command.' );
   } );
 
   it( 'cli:buildCommand:command defaults to "info"', () => {

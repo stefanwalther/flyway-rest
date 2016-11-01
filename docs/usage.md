@@ -1,4 +1,17 @@
 
+## End Points
+
+- **`info`** (GET) - Returns the current versions of nvm, node.js and flyway:
+
+**Example: `*
+```js
+  {
+    "flyway": "4.0.3",
+    "nvm": "v0.32.1",
+    "node.js", "6.9.1"
+  }
+```
+
 **Post parameters** 
 
 - **`mode`** - The execution mode. The following values are possible:

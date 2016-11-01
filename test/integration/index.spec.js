@@ -1,39 +1,54 @@
-/*global describe, expect, it, afterEach, beforeEach*/
-import request from 'supertest';
+/*global describe, expect, it, afterEach, before, beforeEach*/
+import supertest from 'supertest';
 import express from 'express';
-import appServer from './../../src/app-server';
+import http from 'http';
 
-describe( 'integration:basic', () => {
+describe( 'integration:basic', ( suite ) => {
 
   var server = null;
-  beforeEach( ( done ) => {
-    server = new appServer();
-    server.start( () => {
-      done();
+  const FLYWAY_REST_PORT = process.env.FLYWAY_REST_PORT || 9001;
+  const FLYWAY_REST_HOST = process.env.FLYWAY_REST_HOST || 'flyway_rest_service';
+
+  beforeEach( () => {
+    server = supertest.agent( `http://${FLYWAY_REST_HOST}:${FLYWAY_REST_PORT}` );
+  } );
+
+  it.only( 'can ping the REST service (/)', ( done ) => {
+
+    let options = {
+      host: FLYWAY_REST_HOST,
+      port: FLYWAY_REST_PORT,
+      path: '/'
+    };
+
+    http
+      .get( options, function( res ) {
+        if ( res.statusCode == 200 ) {
+          done();
+        }
+      } ).on( 'error', function( e ) {
+      done( e );
     } );
+
   } );
 
-  afterEach( () => {
-    server.stop();
-  } );
-
-  it( 'should by default return 404', ( done ) => {
-    request( server.expressApp )
+  it.only( '/ should return some general pkg information', ( done ) => {
+    server
       .get( '/' )
       .set( 'Accept', 'application/json' )
-      .expect( 404, done );
+      .expect( 200, done );
   } );
 
-  it( 'should return help', ( done ) => {
-    request( server.expressApp )
-      .get( '/help' )
-      .set( 'Accept', 'application/json' )
-      .expect( 200 )
-      .end( function( err, res ) {
-        console.log( 'result: ', res );
-        done();
-      } );
-  } );
+  //it( 'should return help', ( done ) => {
+  //  request( server.expressApp )
+  //    .get( '/help' )
+  //    .set( 'Accept', 'application/json' )
+  //    .expect( 200 )
+  //    .end( function( err, res ) {
+  //      console.log( 'result: ', res );
+  //      done();
+  //    } );
+  //} );
 
   describe( 'migrate', ()=> {
 
@@ -52,7 +67,7 @@ describe( 'integration:basic', () => {
         } )
     } );
 
-    it.only( 'should return the correct mode `simulation`', ( done ) => {
+    it( 'should return the correct mode `simulation`', ( done ) => {
       request( server.expressApp )
         .post( '/migrate' )
         .send( {

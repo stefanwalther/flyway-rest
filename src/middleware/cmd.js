@@ -6,7 +6,7 @@ export function exec() {
     res.status( 200 );
     let result = {
       mode: req.body.mode,
-      cmd: buildCommand( req.body.flyway_args ),
+      cmd: buildCommand( req.body.flyway_args, req.body.command ),
       ts_start: new Date().toJSON(),
       status: 'OK'
     };
@@ -24,7 +24,7 @@ export function buildCommand( flyWayArgs, command = 'info' ) {
   }
 
   if ( [ 'clean', 'info', 'validate', 'baseline', 'repair', 'migrate' ].indexOf( command ) <= -1 ) {
-    throw new Error( 'Invalid Flyway command', command );
+    throw new Error( 'Invalid Flyway command.', command );
   }
 
   var space = ' ';
