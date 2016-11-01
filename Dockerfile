@@ -15,4 +15,4 @@ RUN npm install
 COPY gulpfile.babel.js .
 COPY /src ./src/
 
-EXPOSE 9001
+EXPOSE $PORT

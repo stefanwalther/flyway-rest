@@ -8,5 +8,3 @@ services:
     ports:
       - "9001:9001"
     command: "npm run start"
-# Attach
-#    tty: true
