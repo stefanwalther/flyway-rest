@@ -10,7 +10,7 @@ export function exec() {
       ts_start: new Date().toJSON(),
       status: 'OK'
     };
-    console.log( 'server', result );
+    //console.log( 'server', result );
     res.json( result );
     next();
   };

@@ -23,7 +23,7 @@ export default ( config ) => {
   } );
 
   routes.get('/', (req, res) => {
-    console.log('fetching default');
+    //console.log('fetching default');
     res.sendStatus(200);
   });
 

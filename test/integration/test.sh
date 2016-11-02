@@ -6,13 +6,14 @@ cleanup () {
   docker-compose -p ci rm -f
 }
 trap 'cleanup ; printf "${RED}Tests Failed For Unexpected Reasons${NC}\n"' HUP INT QUIT PIPE TERM
-docker-compose -p ci build && docker-compose -p ci up -d
+#docker-compose -p ci build && docker-compose -p ci up -d
+docker-compose  -p ci up -d --build
 if [ $? -ne 0 ] ; then
   printf "${RED}Docker Compose Failed${NC}\n"
   exit -1
 fi
-TEST_EXIT_CODE=`docker wait flyway_rest_integration`
-docker logs flyway_rest_integration
+TEST_EXIT_CODE=`docker wait ci_flyway_rest_integration`
+docker logs ci_flyway_rest_integration
 if [ -z ${TEST_EXIT_CODE+x} ] || [ "$TEST_EXIT_CODE" -ne 0 ] ; then
   printf "${RED}Tests Failed${NC} - Exit Code: $TEST_EXIT_CODE\n"
 else

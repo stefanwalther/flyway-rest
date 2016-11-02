@@ -20,4 +20,3 @@ RUN npm install
 
 COPY ./test/integration/*.spec.js ./test/integration/
 COPY ./test/mocha.conf.js ./test/
-#COPY ./test/integration/test.sh ./test/integration/
