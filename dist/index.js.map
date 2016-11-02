@@ -1,1 +1,0 @@
-{"version":3,"sources":["index.js"],"names":["appInst","start"],"mappings":";;AAAA;;;;;;AAEA,IAAIA,UAAU,yBAAd;AACAA,QAAQC,KAAR,CAAe,YAAM,CAAE,CAAvB","file":"index.js","sourcesContent":["import appServer from './app-server';\n\nlet appInst = new appServer();\nappInst.start( () => {});\n"],"sourceRoot":"/Users/swr/git/stefanwalther/flyway-rest/src"}
