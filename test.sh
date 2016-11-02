@@ -7,8 +7,8 @@ COMPOSE_FILE='./test/integration/docker-compose.yml'
 WAIT_FOR='flyway_rest_integration'
 
 cleanup () {
-  docker-compose -p ci kill
-  docker-compose -p ci rm -f
+  docker-compose --file=${COMPOSE_FILE} -p ci kill
+  docker-compose --file=${COMPOSE_FILE} -p ci rm -f
 }
 
 #docker-compose --file=${COMPOSE_FILE} -p ci build
