@@ -12,10 +12,10 @@ services:
   flyway_rest_service:
     container_name: 'flyway_rest_service'
     build: ./../../.
-#    links:
-#      - flyway_rest_db
-    depends_on:
+    links:
       - flyway_rest_db
+#    depends_on:
+#      - flyway_rest_db
     environment:
       - PORT=9001
     ports:
@@ -29,10 +29,10 @@ services:
     environment:
       - FLYWAY_REST_PORT=9001
       - FLYWAY_REST_HOST=flyway_rest_service
-#    links:
-#      - flyway_rest_service
-#      - flyway_rest_db
-    depends_on:
+    links:
       - flyway_rest_service
       - flyway_rest_db
+#    depends_on:
+#      - flyway_rest_service
+#      - flyway_rest_db
     command: npm run test:integration
