@@ -32,23 +32,23 @@ export default ( config ) => {
     cmd.exec()
   );
 
-  routes.get( '/clean', ( req, res ) => {
+  routes.post( '/clean', ( req, res ) => {
     res.sendStatus( 200 );
   } );
 
-  routes.get( '/info', ( req, res ) => {
+  routes.post( '/info', ( req, res ) => {
     res.sendStatus( 200 );
   } );
 
-  routes.get( '/validate', ( req, res ) => {
+  routes.post( '/validate', ( req, res ) => {
     res.sendStatus( 200 );
   } );
 
-  routes.get( '/baseline', ( req, res ) => {
+  routes.post( '/baseline', ( req, res ) => {
     res.sendStatus( 200 );
   } );
 
-  routes.get( '/repair', ( req, res ) => {
+  routes.post( '/repair', ( req, res ) => {
     res.sendStatus( 200 );
   } );
 

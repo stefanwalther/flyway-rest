@@ -44,43 +44,45 @@ describe( 'integration-tests', () => {
 
   } );
 
-  describe( 'endpoints', ( done ) => {
+  describe(' POST /migrate', () => {
+      it('checks required params', ( done ) => {
+        server
+          .post('/migrate')
+          .expect( 500, done);
+      })
+  });
 
-    it( 'should container endpoint `clean`', () => {
+  describe( 'endpoints', (  ) => {
+
+    it( 'should container endpoint `clean`', ( done ) => {
       server
-        .get( '/clean' )
-        .expect('Content-Type', /json/)
-        .expect( 200 )
-        .end( ( err, res ) => {
-          if (err) throw err;
-          expect( err ).to.not.exist;
-          done()
-        } );
+        .post( '/clean' )
+        .expect( 200, done )
 
     } );
 
-    it( 'should container endpoint `info`', () => {
+    it( 'should container endpoint `info`', ( done ) => {
       server
-        .get( '/info' )
-        .expect( 200 )
+        .post( '/info' )
+        .expect( 200, done )
     } );
 
-    it( 'should container endpoint `validate`', () => {
+    it( 'should container endpoint `validate`', ( done ) => {
       server
-        .get( '/validate' )
-        .expect( 200 )
+        .post( '/validate' )
+        .expect( 200, done )
     } );
 
-    it( 'should container endpoint `baseline`', () => {
+    it( 'should container endpoint `baseline`', ( done ) => {
       server
-        .get( '/baseline' )
-        .expect( 200 )
+        .post( '/baseline' )
+        .expect( 200, done )
     } );
 
-    it( 'should container endpoint `repair`', () => {
+    it( 'should container endpoint `repair`', ( done ) => {
       server
-        .get( '/repair' )
-        .expect( 200 )
+        .post( '/repair' )
+        .expect( 200, done )
     } );
   } );
 
