@@ -10,7 +10,7 @@ describe( 'integration-tests', () => {
   const FLYWAY_REST_HOST = process.env.FLYWAY_REST_HOST || 'localhost';
   const FLYWAY_REST_URL = `http://${FLYWAY_REST_HOST}:${FLYWAY_REST_PORT}`;
 
-  console.log('Flyway Rest URL: ', FLYWAY_REST_URL);
+  console.log( 'Flyway Rest URL: ', FLYWAY_REST_URL );
 
   beforeEach( () => {
     server = supertest.agent( FLYWAY_REST_URL );
@@ -44,11 +44,19 @@ describe( 'integration-tests', () => {
 
   } );
 
-  describe( 'endpoints', () => {
+  describe( 'endpoints', ( done ) => {
+
     it( 'should container endpoint `clean`', () => {
       server
         .get( '/clean' )
+        .expect('Content-Type', /json/)
         .expect( 200 )
+        .end( ( err, res ) => {
+          if (err) throw err;
+          expect( err ).to.not.exist;
+          done()
+        } );
+
     } );
 
     it( 'should container endpoint `info`', () => {
