@@ -25,7 +25,7 @@ printf "~\n"
 docker inspect flyway_rest_service
 printf "\n"
 printf "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"
-printf "Inspect result for flyway_rest_service: \n"
+printf "Inspect result for flyway_rest_db: \n"
 printf "~~\n"
 docker inspect flyway_rest_db
 printf "\n"
@@ -35,11 +35,9 @@ printf "#############################################################\n"
 
 TEST_EXIT_CODE=`docker wait ${WAIT_FOR}`
 docker logs flyway_rest_integration
-re='^[0-9]+$'
 if [ -z ${TEST_EXIT_CODE+x} ] || [ "$TEST_EXIT_CODE" -ne 0 ]  ; then
   printf "${RED}Tests Failed${NC} - Exit Code: $TEST_EXIT_CODE\n"
 else
-#  printf "$TEST_EXIT_CODE"
   printf "${GREEN}Tests Passed${NC}\n"
 fi
 cleanup
