@@ -14,6 +14,18 @@ cleanup () {
 docker-compose --file=${COMPOSE_FILE} -p ci build
 docker-compose --file=${COMPOSE_FILE} -p ci up -d
 
+printf "#############################################################\n"
+printf "Inspect result for flyway_rest_service: \n"
+printf "--\n"
+docker inspect flyway_rest_service
+printf "\n"
+printf "-------------------------------------------------------------\n"
+printf "Inspect result for flyway_rest_service: \n"
+printf "--\n"
+docker inspect flyway_rest_db
+printf "\n"
+printf "#############################################################\n"
+
 if [ $? -ne 0 ] ; then
   printf "${RED}Docker Compose Failed${NC}\n"
   exit -1
