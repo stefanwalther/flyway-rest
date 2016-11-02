@@ -18,16 +18,8 @@ before_install:
   - sudo mv docker-compose /usr/local/bin
 
 before_script:
-  - cd ./test/integration/
-  - ls
-  - docker-compose -p ci up --build -d
-  - sleep 3
 
 script:
-  - docker version
-  - docker-compose version
+  - chmod a+x test.sh && test.sh
 
 after_script:
-  - docker-compose kill
-
-#script: chmod a+x ./test/integration/test.sh && ./test/integration/test.sh

@@ -4,7 +4,7 @@ services:
     container_name: 'flyway_rest_db'
     image: postgres:9.6
     ports:
-      - "5432:5432"
+      - 5432
     environment:
       - POSTGRES_USER=usr
       - POSTGRES_PWD=pwd

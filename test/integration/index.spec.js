@@ -3,7 +3,7 @@ import supertest from 'supertest';
 import express from 'express';
 import http from 'http';
 
-describe( 'integration-tests', ( ) => {
+describe( 'integration-tests', () => {
 
   var server = null;
   const FLYWAY_REST_PORT = process.env.FLYWAY_REST_PORT || 9001;
@@ -13,7 +13,13 @@ describe( 'integration-tests', ( ) => {
     server = supertest.agent( `http://${FLYWAY_REST_HOST}:${FLYWAY_REST_PORT}` );
   } );
 
-  describe('general setup', () => {
+  describe( 'test fail', () => {
+    it( 'so just fail', () => {
+      expect( true ).to.be.false;
+    } )
+  } );
+
+  describe( 'general setup', () => {
     it( 'can ping the REST service (/)', ( done ) => {
 
       let options = {
@@ -39,9 +45,9 @@ describe( 'integration-tests', ( ) => {
         .expect( 200, done );
     } );
 
-  });
+  } );
 
-  describe('endpoints', () => {
+  describe( 'endpoints', () => {
     it( 'should container endpoint `clean`', () => {
       server
         .get( '/clean' )
@@ -71,10 +77,7 @@ describe( 'integration-tests', ( ) => {
         .get( '/repair' )
         .expect( 200 )
     } );
-  });
-
-
-
+  } );
 
   describe( '/migrate', ()=> {
 
