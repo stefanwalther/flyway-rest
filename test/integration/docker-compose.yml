@@ -2,7 +2,7 @@ version: '2'
 services:
   flyway_rest_db:
     container_name: 'flyway-integration-db'
-    image: postgres:9.5
+    image: postgres:9.6
     ports:
       - "5432:5432"
     environment:
@@ -26,6 +26,7 @@ services:
       dockerfile: ./test/integration/Dockerfile
     environment:
       - FLYWAY_REST_PORT=9001
+      - FLYWAY_REST_HOST=flyway_rest_service
     links:
       - flyway_rest_service
-    command: npm run test:integration
+    command: npm run test:integration:interactive
