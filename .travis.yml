@@ -1,6 +1,9 @@
 sudo: required
 language: node_js
-
+node_js:
+  - 'latest'
+  - '6.9.1'
+  - '6'
 services:
   - docker
 
@@ -20,6 +23,7 @@ before_install:
 before_script:
 
 script:
+  - npm run test:unit
   - chmod a+x ./test.sh && ./test.sh
 
 after_script:
