@@ -17,12 +17,16 @@ before_install:
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
 
-install: echo OK
+before_script:
+  - cd ./test/integration/
+  - docker-compose up -p ci --build d
+  - sleep 3
 
 script:
   - docker version
   - docker-compose version
-  - cd ./test/integration/
-  - docker-compose up -p ci --build -d
+
+after_script:
+  - docker-compose kill
 
 #script: chmod a+x ./test/integration/test.sh && ./test/integration/test.sh
