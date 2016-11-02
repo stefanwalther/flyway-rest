@@ -19,7 +19,8 @@ before_install:
 
 before_script:
   - cd ./test/integration/
-  - docker-compose up -p ci --build d
+  - ls
+  - docker-compose -p ci up --build -d
   - sleep 3
 
 script:
