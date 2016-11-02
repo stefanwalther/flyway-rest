@@ -19,7 +19,7 @@ printf "Inspect result for flyway_rest_service: \n"
 printf "--\n"
 docker inspect flyway_rest_service
 printf "\n"
-printf "-------------------------------------------------------------\n"
+printf "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"
 printf "Inspect result for flyway_rest_service: \n"
 printf "--\n"
 docker inspect flyway_rest_db
