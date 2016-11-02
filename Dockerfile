@@ -23,12 +23,14 @@ ENV NVM_VERSION v0.32.1
 
 # Replace shell with bash so we can source files
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh \
-  # make sure apt is up to date
+# make sure apt is up to date
   && apt-get update --fix-missing \
   && apt-get install -y curl \
-  && apt-get install -y build-essential libssl-dev \
-  # Install nvm with node and npm
-  && curl https://raw.githubusercontent.com/creationix/nvm/${NVM_VERSION}/install.sh | bash \
+  && apt-get install -y build-essential libssl-dev
+
+
+# Install nvm with node and npm
+RUN curl https://raw.githubusercontent.com/creationix/nvm/${NVM_VERSION}/install.sh | bash \
   && source $NVM_DIR/nvm.sh \
   && nvm install $NODE_VERSION \
   && nvm alias default $NODE_VERSION \
