@@ -1,7 +1,12 @@
 sudo: required
+language: node_js
 
 services:
   - docker
+
+cache:
+  directories:
+    - node_modules
 
 env:
   DOCKER_COMPOSE_VERSION: 1.8.0
@@ -14,4 +19,10 @@ before_install:
 
 install: echo OK
 
-script: chmod a+x ./test/integration/test.sh && ./test/integration/test.sh
+script:
+  - docker version
+  - docker-compose version
+  - cd ./test/integration/
+  - docker-compose up -p ci --build -d
+
+#script: chmod a+x ./test/integration/test.sh && ./test/integration/test.sh

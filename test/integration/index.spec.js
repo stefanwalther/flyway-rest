@@ -105,7 +105,7 @@ describe( 'integration-tests', ( ) => {
         .set( 'Accept', 'application/json' )
         .expect( 200 )
         .end( ( err, res ) => {
-          console.log( 'res', res.body );
+          //console.log( 'res', res.body );
           expect( err ).to.not.exist;
           expect( res.body ).to.have.property( 'mode' );
           expect( res.body.mode ).to.equal( 'simulation' );

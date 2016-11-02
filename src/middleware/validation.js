@@ -2,8 +2,6 @@ export function validateParams() {
   return function( req, res, next ) {
     let errors = [];
 
-
-
     if ( req.body && !req.body.flyway_args ) {
       errors.push( 'Missing Flyway arguments.' );
     }

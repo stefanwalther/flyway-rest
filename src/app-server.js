@@ -27,7 +27,6 @@ export default class appServer {
   start( done ) {
     if ( !this.server ) {
       let port = process.env.PORT || defaultConfig.port;
-      console.log( 'env.port', process.env.PORT );
       this.server = this.expressApp.listen( port, ( err ) => {
         if ( !err ) {
           console.log( `Started on port ${port}.` );

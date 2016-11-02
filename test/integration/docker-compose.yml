@@ -27,6 +27,7 @@ services:
     environment:
       - FLYWAY_REST_PORT=9001
       - FLYWAY_REST_HOST=flyway_rest_service
-    links:
+    depends_on:
       - flyway_rest_service
-    command: npm run test:integration:interactive
+    command: npm run test:integration
+#    command: while true; echo .; do sleep 1000; done

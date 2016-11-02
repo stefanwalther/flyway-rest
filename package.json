@@ -29,9 +29,9 @@
     "lint": "eslint src",
     "lint:test": "eslint test",
     "test": "npm run test:unit && npm run test:integration",
-    "test:integration:interactive": "mocha './test/integration/**/*.spec.js' --compilers js:babel-core/register --require './test/mocha.conf.js'",
+    "test:integration": "mocha './test/integration/**/*.spec.js' --compilers js:babel-core/register --require './test/mocha.conf.js'",
     "test:unit": "mocha './test/unit/**/*.spec.js' --compilers js:babel-core/register --require './test/mocha.conf.js'",
-    "test:integration": "cd ./test/integration && bash test.sh && cd .."
+    "test:setup": "cd ./test/integration && bash test.sh && cd .."
   },
   "dependencies": {
     "execa": "^0.5.0"
