@@ -20,6 +20,6 @@ before_install:
 before_script:
 
 script:
-  - ./test.sh
+  - chmod a+x ./test.sh && ./test.sh
 
 after_script:
