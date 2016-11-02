@@ -13,12 +13,6 @@ describe( 'integration-tests', () => {
     server = supertest.agent( `http://${FLYWAY_REST_HOST}:${FLYWAY_REST_PORT}` );
   } );
 
-  describe( 'test fail', () => {
-    it( 'so just fail', () => {
-      expect( true ).to.be.false;
-    } )
-  } );
-
   describe( 'general setup', () => {
     it( 'can ping the REST service (/)', ( done ) => {
 
