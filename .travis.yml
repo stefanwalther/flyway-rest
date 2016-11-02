@@ -14,4 +14,4 @@ before_install:
 
 install: echo OK
 
-script: ./test/integration/test.sh
+script: chmod a+x ./test/integration/test.sh && ./test/integration/test.sh

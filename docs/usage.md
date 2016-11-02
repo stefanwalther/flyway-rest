@@ -1,5 +1,6 @@
 
 ## End Points
+<!-- see https://github.com/pando85/cherrymusic/blob/devel-django/docs/api/v1/index.md -->
 
 - **`info`** (GET) - Returns the current versions of nvm, node.js and flyway:
 
