@@ -3,8 +3,8 @@
   "version": "0.0.2",
   "description": "REST interface for flyway.",
   "keywords": [
-    "flyway",
-    "REST"
+    "REST",
+    "flyway"
   ],
   "homepage": "https://github.com/stefanwalther/flyway-rest",
   "bugs": {
@@ -23,15 +23,15 @@
   "repository": "stefanwalther/flyway-rest",
   "scripts": {
     "build": "gulp build",
-    "start": "gulp build && node ./dist/index.js",
     "coverage": "babel-node ./node_modules/.bin/isparta cover _mocha",
     "docs": "verb",
     "lint": "eslint src",
     "lint:test": "eslint test",
-    "testx": "npm run test:unit && npm run test:integration",
+    "start": "gulp build && node ./dist/index.js",
     "test:integration": "mocha './test/integration/**/*.spec.js' --compilers js:babel-core/register --require './test/mocha.conf.js'",
+    "test:setup": "bash ./test.sh",
     "test:unit": "mocha './test/unit/**/*.spec.js' --compilers js:babel-core/register --require './test/mocha.conf.js'",
-    "test:setup": "bash ./test.sh"
+    "testx": "npm run test:unit && npm run test:integration"
   },
   "dependencies": {
     "execa": "^0.5.0"

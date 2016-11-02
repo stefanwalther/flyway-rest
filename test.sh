@@ -39,7 +39,7 @@ re='^[0-9]+$'
 if [ -z ${TEST_EXIT_CODE+x} ] || [ "$TEST_EXIT_CODE" -ne 0 ]  ; then
   printf "${RED}Tests Failed${NC} - Exit Code: $TEST_EXIT_CODE\n"
 else
-  printf "$TEST_EXIT_CODE"
+#  printf "$TEST_EXIT_CODE"
   printf "${GREEN}Tests Passed${NC}\n"
 fi
 cleanup
