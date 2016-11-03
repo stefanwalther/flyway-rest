@@ -1,3 +1,5 @@
+# flyway_rest_service
+
 FROM java:8-jre
 
 # ---------- Install flyway command line
