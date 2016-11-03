@@ -27,10 +27,9 @@ printf "\n"
 printf "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"
 printf "Inspect result for flyway_rest_db: \n"
 printf "~~\n"
-docker inspect flyway_rest_db
+#docker inspect flyway_rest_db
 printf "\n"
 printf "#############################################################\n"
-
 
 
 TEST_EXIT_CODE=`docker wait ${WAIT_FOR}`
