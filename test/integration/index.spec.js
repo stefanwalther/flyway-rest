@@ -12,6 +12,12 @@ describe( 'integration-tests', () => {
 
   console.log( 'Flyway Rest URL: ', FLYWAY_REST_URL );
 
+  before( (done) => {
+    setTimeout( () => {
+        done();
+    }, 2000);
+  });
+
   beforeEach( () => {
     server = supertest.agent( FLYWAY_REST_URL );
   } );
