@@ -40,6 +40,7 @@ export default ( config ) => {
   );
 
   routes.post( '/clean',
+    validation.addParams(),
     validation.validateParams(),
     cmd.exec()
   );

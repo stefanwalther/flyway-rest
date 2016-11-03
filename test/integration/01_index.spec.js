@@ -2,7 +2,7 @@
 import supertest from 'supertest-as-promised';
 import * as lib from './lib/lib';
 
-describe( 'integration-tests', () => {
+describe( 'integration-tests:general', () => {
 
   var server = null;
   const FLYWAY_REST_PORT = process.env.FLYWAY_REST_PORT || 9001;
@@ -17,10 +17,6 @@ describe( 'integration-tests', () => {
     return lib.healthcheck( server );
 
   } );
-
-  //beforeEach( () => {
-  //
-  //} );
 
   describe( 'general setup', () => {
     it( 'can ping the REST service (/)', ( /*done*/ ) => {
@@ -84,14 +80,6 @@ describe( 'integration-tests', () => {
     } );
 
 
-  } );
-
-  describe( 'POST /clean', () => {
-    it( 'checks required params', () => {
-      return server
-        .post( '/clean' )
-        .expect( 500 );
-    } )
   } );
 
   describe( 'POST /info', () => {

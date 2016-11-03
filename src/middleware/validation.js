@@ -1,3 +1,10 @@
+export function addParams() {
+  return function (req, res, next) {
+    req.body.command = 'clean';
+    return next();
+  }
+}
+
 export function validateParams() {
   return function( req, res, next ) {
     let errors = [];

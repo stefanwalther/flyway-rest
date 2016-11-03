@@ -5,22 +5,24 @@ export function exec() {
 
     let command = buildCommand( req.body.flyway_args, req.body.command );
 
-    let result = {
+    let returnResult = {
       mode: req.body.mode,
       cmd: command,
       ts_start: new Date().toJSON()
     };
 
-    if ( !result.mode === 'simulation' ) {
+    if ( returnResult.mode !== 'simulation' ) {
       execa.shell( command )
         .then( result => {
+          returnResult.status = 'OK';
+          returnResult.stdout = result;
           res.status( 200 );
-          result.status = 'OK';
           finish( next );
         } )
         .catch( error => {
+          returnResult.status = 'Error';
+          returnResult.stderr = error;
           res.status( 500 );
-          result.status = 'Error';
           finish( next );
 
         } );
@@ -30,7 +32,7 @@ export function exec() {
 
     function finish( next ) {
 
-      res.json( result );
+      res.json( returnResult );
       next();
     }
   };
@@ -48,9 +50,10 @@ export function buildCommand( flyWayArgs, command = 'info' ) {
   }
 
   var space = ' ';
+  let del = '=';
   var cmd = 'flyway';
   for ( const key of Object.keys( flyWayArgs ) ) {
-    cmd += space + '--' + key + space + flyWayArgs[ key ];
+    cmd += space + '-' + key + del + flyWayArgs[ key ];
   }
   cmd += space + command;
   return cmd;
