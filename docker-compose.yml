@@ -3,12 +3,13 @@ services:
 
   flyway_rest_db:
     extends:
-      file: ./flyway_rest_db/docker-compose.yml
+      file: ./docker/flyway_rest_db/docker-compose.yml
       service: flyway_rest_db
 
   flyway_rest_service:
     extends:
-      file: ./flyway_rest_service/docker-compose.yml
+      file: ./docker/flyway_rest_service/docker-compose.yml
       service: flyway_rest_service
     links:
       - flyway_rest_db
+
