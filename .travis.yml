@@ -24,4 +24,3 @@ script:
   - chmod a+x ./docker/docker-ci.sh && ./docker/docker-ci.sh
 
 after_script:
-  - docker-compose kill

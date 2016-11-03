@@ -18,5 +18,7 @@ COPY .babelrc .
 
 RUN npm install
 
-COPY ./test/integration/*.spec.js ./test/integration/
-COPY ./test/mocha.conf.js ./test/
+COPY ./src ./src
+COPY ./test ./test
+#COPY ./test/integration/*.spec.js ./test/integration/
+#COPY ./test/mocha.conf.js ./test/

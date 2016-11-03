@@ -27,6 +27,7 @@ printf "#############################################################\n"
 
 }
 
+docker-compose --file=${COMPOSE_FILE} down
 docker-compose --file=${COMPOSE_FILE} -p ci up -d --build
 
 if [ $? -ne 0 ] ; then
