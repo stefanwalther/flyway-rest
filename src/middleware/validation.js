@@ -22,5 +22,4 @@ export function validateParams() {
       return next();
     }
   };
-
 }

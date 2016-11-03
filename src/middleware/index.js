@@ -36,9 +36,10 @@ export default ( config ) => {
     cmd.exec()
   );
 
-  routes.post( '/clean', ( req, res ) => {
-    res.sendStatus( 200 );
-  } );
+  routes.post( '/clean',
+    validation.validateParams(),
+    cmd.exec()
+  );
 
   routes.post( '/info', ( req, res ) => {
     res.sendStatus( 200 );

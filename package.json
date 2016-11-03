@@ -55,10 +55,11 @@
     "gulp-sourcemaps": "^2.2.0",
     "mocha": "*",
     "nyc": "^8.3.2",
-    "request": "^2.76.0",
-    "request-promise": "^4.1.1",
+    "promise-retry": "^1.1.1",
     "retry-promise": "^1.0.0",
+    "superagent": "^2.3.0",
     "supertest": "^2.0.1",
+    "supertest-as-promised": "^4.0.2",
     "yargs": "^6.3.0"
   },
   "engines": {

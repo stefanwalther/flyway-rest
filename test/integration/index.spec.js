@@ -1,14 +1,6 @@
 /*global describe, expect, it, afterEach, before, beforeEach*/
-import supertest from 'supertest';
-//import express from 'express';
-import http from 'http';
-import requestPromise from 'request-promise';
-import retryPromise from 'retry-promise';
-
-//Todo: remove the following libs and solve differently
-// - request (implicitely required)
-// - request-promise
-// - retry-promise
+import supertest from 'supertest-as-promised';
+import promiseRetry from 'promise-retry';
 
 describe( 'integration-tests', () => {
 
@@ -19,60 +11,49 @@ describe( 'integration-tests', () => {
 
   console.log( 'Flyway Rest URL: ', FLYWAY_REST_URL, '\n' );
 
-  before( ( done ) => {
+  before( () => {
+    server = supertest.agent( FLYWAY_REST_URL );
 
-    //setTimeout( () => {
-    //  done();
-    //}, 2000 );
+    const healthCheck = () => {
 
-    const healthCheck = ( attempt ) => {
-      if ( attempt > 1 ) {
-        console.log( 'health check failed, retrying ...\n' );
-      }
-      return requestPromise( {
-        method: 'GET',
-        uri: `http://${FLYWAY_REST_HOST}:${FLYWAY_REST_PORT}/health`,
-        json: true,
-        resolveWithFullResponse: true,
-      } ).then( ( response ) => {
-        if ( response.statusCode !== 200 ) {
-          throw new Error( 'Health Check Failed' );
-        }
-      } );
+      return server
+        .get( '/health' )
+        .expect( 200 )
     };
 
-    return retryPromise( { max: 40, backoff: 250 }, healthCheck )
-      .then( () => {
-        done();
-      } )
-      .catch( ( error ) => done( error ) );
+    let retryOpts = {
+      retries: 200,
+      factor: 1,
+      minTimeout: 250
+    };
+
+    return promiseRetry( function( retry, attempts ) {
+
+      if ( attempts > 1 ) {
+        console.log( `Health-check failed, retry (${attempts - 1})` );
+      }
+
+      return healthCheck()
+        .catch( retry );
+
+    }, retryOpts )
 
   } );
 
-  beforeEach( () => {
-    server = supertest.agent( FLYWAY_REST_URL );
-  } );
+  //beforeEach( () => {
+  //
+  //} );
 
   describe( 'general setup', () => {
-    it( 'can ping the REST service (/)', ( done ) => {
+    it( 'can ping the REST service (/)', ( /*done*/ ) => {
 
-      let options = {
-        host: FLYWAY_REST_HOST,
-        port: FLYWAY_REST_PORT,
-        path: '/'
-      };
+      return server
+        .get( '/' )
+        .expect( 200 )
 
-      http
-        .get( options, function( res ) {
-          if ( res.statusCode == 200 ) {
-            done();
-          }
-        } ).on( 'error', function( e ) {
-        done( e );
-      } );
     } );
 
-    it( '/ should return some general pkg information', ( done ) => {
+    xit( '/ should return some general pkg information', ( done ) => {
       server
         .get( '/' )
         .set( 'Accept', 'application/json' )
@@ -81,49 +62,12 @@ describe( 'integration-tests', () => {
 
   } );
 
-  describe( ' POST /migrate', () => {
-    it( 'checks required params', ( done ) => {
-      server
+  describe( 'POST /migrate', () => {
+    it( 'checks required params', () => {
+      return server
         .post( '/migrate' )
-        .expect( 500, done );
-    } )
-  } );
-
-  describe( 'endpoints', () => {
-
-    it( 'should container endpoint `clean`', ( done ) => {
-      server
-        .post( '/clean' )
-        .expect( 200, done )
-
+        .expect( 500 );
     } );
-
-    it( 'should container endpoint `info`', ( done ) => {
-      server
-        .post( '/info' )
-        .expect( 200, done )
-    } );
-
-    it( 'should container endpoint `validate`', ( done ) => {
-      server
-        .post( '/validate' )
-        .expect( 200, done )
-    } );
-
-    it( 'should container endpoint `baseline`', ( done ) => {
-      server
-        .post( '/baseline' )
-        .expect( 200, done )
-    } );
-
-    it( 'should container endpoint `repair`', ( done ) => {
-      server
-        .post( '/repair' )
-        .expect( 200, done )
-    } );
-  } );
-
-  describe( '/migrate', ()=> {
 
     it( 'should fail without any parameters', ( done ) => {
       server
@@ -139,6 +83,7 @@ describe( 'integration-tests', () => {
           done();
         } )
     } );
+
 
     it( 'should return the correct mode `simulation`', ( done ) => {
       server
@@ -160,6 +105,49 @@ describe( 'integration-tests', () => {
         } )
     } );
 
+
   } );
+
+  describe( 'POST /clean', () => {
+    it( 'checks required params', () => {
+      return server
+        .post( '/clean' )
+        .expect( 500 );
+    } )
+  } );
+
+  describe( 'POST /info', () => {
+    it( 'checks required params', () => {
+      return server
+        .post( '/info' )
+        .expect( 500 );
+    } )
+  } );
+
+  describe( 'POST /validate', () => {
+    it( 'checks required params', () => {
+      return server
+        .post( '/validate' )
+        .expect( 500 );
+    } )
+  } );
+
+  describe( 'POST /baseline', () => {
+    it( 'checks required params', () => {
+      return server
+        .post( '/baseline' )
+        .expect( 500 );
+    } )
+  } );
+
+  describe( 'POST /repair', () => {
+    it( 'checks required params', () => {
+      return server
+        .post( '/repair' )
+        .expect( 500 );
+    } )
+  } );
+
+
 
 } );
