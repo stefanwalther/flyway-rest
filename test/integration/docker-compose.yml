@@ -19,7 +19,7 @@ services:
     environment:
       - PORT=9001
     ports:
-      - 9001
+      - "9001:9001"
     command: "npm run start"
   flyway_rest_integration:
     container_name: 'flyway_rest_integration'
