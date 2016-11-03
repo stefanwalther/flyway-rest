@@ -1,19 +1,19 @@
 version: '2'
 services:
-  flyway_rest_db:
-    container_name: 'flyway_rest_db'
-    image: postgres:9.6
-    ports:
-      - 5432
-    environment:
-      - POSTGRES_USER=usr
-      - POSTGRES_PWD=pwd
-      - POSTGRES_DB=flyway
+#  flyway_rest_db:
+#    container_name: 'flyway_rest_db'
+#    image: postgres:9.6
+#    ports:
+#      - 5432
+#    environment:
+#      - POSTGRES_USER=usr
+#      - POSTGRES_PWD=pwd
+#      - POSTGRES_DB=flyway
   flyway_rest_service:
     container_name: 'flyway_rest_service'
     build: ./../../.
-    links:
-      - flyway_rest_db
+#    links:
+#      - flyway_rest_db
 #    depends_on:
 #      - flyway_rest_db
     environment:

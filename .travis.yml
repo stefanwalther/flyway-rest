@@ -22,3 +22,4 @@ script:
   - chmod a+x ./test.sh && ./test.sh
 
 after_script:
+  - docker-compose kill
