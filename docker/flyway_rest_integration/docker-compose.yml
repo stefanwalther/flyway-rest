@@ -8,5 +8,5 @@ services:
       dockerfile: ./docker/flyway_rest_integration/Dockerfile
     environment:
       - FLYWAY_REST_PORT=9001
-      - FLYWAY_REST_HOST=flyway_rest_service
+      - FLYWAY_REST_HOST=flyway_rest
     command: npm run test

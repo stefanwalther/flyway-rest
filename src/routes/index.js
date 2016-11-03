@@ -1,9 +1,9 @@
 import { Router } from 'express';
-import * as validation from './validation';
-import * as cmd from './cmd';
-import execa from 'execa';
+import * as validation from './../middleware/validation';
+import * as cmd from './../middleware/cmd';
 import pkg from './../../package.json';
 
+// Todo: config not being used right now ...
 export default ( config ) => {
   let routes = Router();
 
@@ -16,6 +16,9 @@ export default ( config ) => {
     } )
   } );
 
+  /**
+   * Endpoint to ping the server.
+   */
   routes.get( '/health', ( req, res ) => {
     res.status( 200 ).send( {} );
   } );
@@ -26,6 +29,7 @@ export default ( config ) => {
     } );
   } );
 
+  //Todo: Can probably be removed or replaced; no value in having that
   routes.get( '/', ( req, res ) => {
     res.sendStatus( 200 );
   } );

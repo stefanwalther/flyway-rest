@@ -7,6 +7,6 @@ services:
     ports:
       - 5432
     environment:
-      - POSTGRES_USER=usr
-      - POSTGRES_PWD=pwd
+      - POSTGRES_USER=postgres
+      - POSTGRES_PWD=postgres
       - POSTGRES_DB=flyway

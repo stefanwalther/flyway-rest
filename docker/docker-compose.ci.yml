@@ -6,10 +6,10 @@ services:
       file: ./flyway_rest_db/docker-compose.yml
       service: flyway_rest_db
 
-  flyway_rest_service:
+  flyway_rest:
     extends:
-      file: ./flyway_rest_service/docker-compose.yml
-      service: flyway_rest_service
+      file: ./flyway_rest/docker-compose.yml
+      service: flyway_rest
     links:
       - flyway_rest_db
 
@@ -18,5 +18,5 @@ services:
       file: ./flyway_rest_integration/docker-compose.yml
       service: flyway_rest_integration
     links:
-      - flyway_rest_service
+      - flyway_rest
       - flyway_rest_db

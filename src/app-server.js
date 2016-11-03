@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import middleware from './middleware';
+import routes from './routes';
 import defaultConfig from './config.json';
 
 /**
@@ -27,7 +27,7 @@ export default class appServer {
       limit: defaultConfig.bodyLimit
     } ) );
 
-    this.expressApp.use( middleware( defaultConfig ) );
+    this.expressApp.use( routes( defaultConfig ) );
 
   }
 

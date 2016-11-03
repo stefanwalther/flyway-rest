@@ -1,6 +1,6 @@
 /*global describe, expect, it, afterEach, before, beforeEach*/
 import supertest from 'supertest-as-promised';
-import promiseRetry from 'promise-retry';
+import * as lib from './lib/lib';
 
 describe( 'integration-tests', () => {
 
@@ -14,29 +14,7 @@ describe( 'integration-tests', () => {
   before( () => {
     server = supertest.agent( FLYWAY_REST_URL );
 
-    const healthCheck = () => {
-
-      return server
-        .get( '/health' )
-        .expect( 200 )
-    };
-
-    let retryOpts = {
-      retries: 200,
-      factor: 1,
-      minTimeout: 250
-    };
-
-    return promiseRetry( function( retry, attempts ) {
-
-      if ( attempts > 1 ) {
-        console.log( `Health-check failed, retry (${attempts - 1})` );
-      }
-
-      return healthCheck()
-        .catch( retry );
-
-    }, retryOpts )
+    return lib.healthcheck( server );
 
   } );
 

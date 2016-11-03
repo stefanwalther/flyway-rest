@@ -3,16 +3,36 @@ import execa from 'execa';
 export function exec() {
   return function( req, res, next ) {
 
-    res.status( 200 );
+    let command = buildCommand( req.body.flyway_args, req.body.command );
+
     let result = {
       mode: req.body.mode,
-      cmd: buildCommand( req.body.flyway_args, req.body.command ),
-      ts_start: new Date().toJSON(),
-      status: 'OK'
+      cmd: command,
+      ts_start: new Date().toJSON()
     };
-    //console.log( 'server', result );
-    res.json( result );
-    next();
+
+    if ( !result.mode === 'simulation' ) {
+      execa.shell( command )
+        .then( result => {
+          res.status( 200 );
+          result.status = 'OK';
+          finish( next );
+        } )
+        .catch( error => {
+          res.status( 500 );
+          result.status = 'Error';
+          finish( next );
+
+        } );
+    } else {
+      finish( next );
+    }
+
+    function finish( next ) {
+
+      res.json( result );
+      next();
+    }
   };
 
 }
@@ -29,8 +49,8 @@ export function buildCommand( flyWayArgs, command = 'info' ) {
 
   var space = ' ';
   var cmd = 'flyway';
-  for ( const key of Object.keys(flyWayArgs) ) {
-      cmd += space + '--' + key + space + flyWayArgs[key];
+  for ( const key of Object.keys( flyWayArgs ) ) {
+    cmd += space + '--' + key + space + flyWayArgs[ key ];
   }
   cmd += space + command;
   return cmd;

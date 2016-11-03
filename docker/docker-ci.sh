@@ -35,12 +35,12 @@ if [ $? -ne 0 ] ; then
   exit -1
 fi
 
-logInspect "flyway_rest_service"
+logInspect "flyway_rest"
 logInspect "flyway_rest_db"
 logInspect "flyway_rest_integration"
 
 TEST_EXIT_CODE=`docker wait ${WAIT_FOR}`
-docker logs flyway_rest_service
+docker logs flyway_rest
 docker logs flyway_rest_integration
 if [ -z ${TEST_EXIT_CODE+x} ] || [ "$TEST_EXIT_CODE" -ne 0 ]  ; then
   printf "${RED}Tests Failed${NC} - Exit Code: $TEST_EXIT_CODE\n"

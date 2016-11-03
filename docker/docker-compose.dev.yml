@@ -6,14 +6,21 @@ services:
       file: ./flyway_rest_db/docker-compose.yml
       service: flyway_rest_db
 
-  flyway_rest_service:
+  flyway_rest:
     extends:
-      file: ./flyway_rest_service/docker-compose.yml
-      service: flyway_rest_service
+      file: ./flyway_rest/docker-compose.yml
+      service: flyway_rest
     links:
       - flyway_rest_db
     volumes:
       - ./../:/home/app/
     command: "npm run start:dev"
 
+  flyway_pgadmin:
+    container_name: "flyway_pgadmin"
+    image: fenglc/pgadmin4:1.1
+    ports:
+      - "5050:5050"
+    links:
+      - flyway_rest_db
 
