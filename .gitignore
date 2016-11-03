@@ -1,6 +1,7 @@
 # project related
 /dist
 .v8flags*
+.config/
 
 # always ignore files
 *.DS_Store
