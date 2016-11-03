@@ -41,21 +41,25 @@ export default ( config ) => {
     cmd.exec()
   );
 
-  routes.post( '/info', ( req, res ) => {
-    res.sendStatus( 200 );
-  } );
+  routes.post( '/info',
+    validation.validateParams(),
+    cmd.exec()
+  );
 
-  routes.post( '/validate', ( req, res ) => {
-    res.sendStatus( 200 );
-  } );
+  routes.post( '/validate',
+    validation.validateParams(),
+    cmd.exec()
+  );
 
-  routes.post( '/baseline', ( req, res ) => {
-    res.sendStatus( 200 );
-  } );
+  routes.post( '/baseline',
+    validation.validateParams(),
+    cmd.exec()
+  );
 
-  routes.post( '/repair', ( req, res ) => {
-    res.sendStatus( 200 );
-  } );
+  routes.post( '/repair',
+    validation.validateParams(),
+    cmd.exec()
+  );
 
   return routes;
 }

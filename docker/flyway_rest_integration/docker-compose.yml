@@ -1,0 +1,12 @@
+version: '2'
+services:
+
+ flyway_rest_integration:
+    container_name: 'flyway_rest_integration'
+    build:
+      context: ./../../.
+      dockerfile: ./docker/flyway_rest_integration/Dockerfile
+    environment:
+      - FLYWAY_REST_PORT=9001
+      - FLYWAY_REST_HOST=flyway_rest_service
+    command: "npm run test:integration"

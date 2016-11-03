@@ -3,7 +3,7 @@
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 NC='\033[0m'
-COMPOSE_FILE='./test/integration/docker-compose.yml'
+COMPOSE_FILE='./docker/docker-compose.ci.yml'
 WAIT_FOR='flyway_rest_integration'
 
 function cleanup () {
@@ -27,7 +27,6 @@ printf "#############################################################\n"
 
 }
 
-#docker-compose --file=${COMPOSE_FILE} -p ci build
 docker-compose --file=${COMPOSE_FILE} -p ci up -d --build
 
 if [ $? -ne 0 ] ; then
@@ -36,24 +35,8 @@ if [ $? -ne 0 ] ; then
 fi
 
 logInspect "flyway_rest_service"
-
-#printf "#############################################################\n"
-#printf "Inspect result for flyway_rest_service: \n"
-#printf "~\n"
-#docker inspect flyway_rest_service
-#printf "\n"
-#printf "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"
-#printf "Inspect result for flyway_rest_db: \n"
-#printf "~~\n"
-#docker inspect flyway_rest_db
-#printf "\n"
-#printf "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"
-#printf "Inspect result for flyway_rest_integration: \n"
-#printf "~~\n"
-#docker inspect flyway_rest_integration
-#printf "\n"
-#printf "#############################################################\n"
-
+logInspect "flyway_rest_db"
+logInspect "flyway_rest_integration"
 
 TEST_EXIT_CODE=`docker wait ${WAIT_FOR}`
 docker logs flyway_rest_service
