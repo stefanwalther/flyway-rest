@@ -22,7 +22,6 @@ ENV NODE_VERSION 6.9.1
 ENV NVM_DIR /usr/local/nvm
 ENV NVM_VERSION v0.32.1
 
-
 # Replace shell with bash so we can source files
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh \
 # make sure apt is up to date
@@ -39,7 +38,9 @@ RUN curl https://raw.githubusercontent.com/creationix/nvm/${NVM_VERSION}/install
   && nvm use default
 
 ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
-ENV PATH      $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
+ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
+# Disable writing the babel.json file (https://babeljs.io/docs/usage/require/#environment-variables)
+ENV BABEL_DISABLE_CACHE=1
 
 CMD node -v
 CMD flyway -v
@@ -56,7 +57,9 @@ WORKDIR $HOME
 COPY package.json .
 COPY .babelrc .
 
-RUN npm install
+RUN npm install nodemon -g \
+  && npm install
+
 
 COPY gulpfile.babel.js .
 COPY /src ./src/

@@ -22,12 +22,16 @@
   "main": "./dist/index.js",
   "repository": "stefanwalther/flyway-rest",
   "scripts": {
+    "prestart": "npm run build",
+    "start": "npm run serve",
+    "start:dev": "nodemon --watch src --exec npm start",
     "build": "gulp build",
+    "serve": "node ./dist/index.js",
+    "postserve": "rm ./.v8flags.*.json",
     "coverage": "babel-node ./node_modules/.bin/isparta cover _mocha",
     "docs": "verb",
     "lint": "eslint src",
     "lint:test": "eslint test",
-    "start": "gulp build && node ./dist/index.js",
     "test": "npm run test:unit && npm run test:integration",
     "test:integration": "mocha './test/integration/**/*.spec.js' --compilers js:babel-core/register --require './test/mocha.conf.js' --timeout 10000",
     "test:unit": "mocha './test/unit/**/*.spec.js' --compilers js:babel-core/register --require './test/mocha.conf.js'"

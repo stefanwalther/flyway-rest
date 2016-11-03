@@ -4,11 +4,18 @@ import bodyParser from 'body-parser';
 import middleware from './middleware';
 import defaultConfig from './config.json';
 
+/**
+ * appServer
+ */
 export default class appServer {
   constructor() {
     this.init();
   }
 
+  /**
+   * Initialize the express server.
+   * Todo: Should be an internal method
+   */
   init() {
     this.expressApp = express();
 
@@ -24,6 +31,10 @@ export default class appServer {
 
   }
 
+  /**
+   * Start the server
+   * @param done
+   */
   start( done ) {
     if ( !this.server ) {
       let port = process.env.PORT || defaultConfig.port;
@@ -41,6 +52,10 @@ export default class appServer {
 
   }
 
+  /**
+   * Stop the server.
+   * @returns {void|*}
+   */
   stop() {
     if ( this.server ) {
       return this.server.close();
