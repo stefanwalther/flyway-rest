@@ -61,3 +61,4 @@ COPY /src ./src/
 
 EXPOSE $PORT
 
+CMD ["npm", "run", "start"]
