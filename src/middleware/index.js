@@ -7,25 +7,29 @@ import pkg from './../../package.json';
 export default ( config ) => {
   let routes = Router();
 
-  routes.get('/', (req, res) => {
+  routes.get( '/', ( req, res ) => {
     res.json( {
       name: pkg.name,
       version: pkg.version,
       description: pkg.description,
       homepage: pkg.homepage
-    })
-  });
+    } )
+  } );
+
+  routes.get( '/health', ( req, res ) => {
+    res.status( 200 ).send( {} );
+  } );
 
   routes.get( '/info', ( req, res ) => {
     res.json( {
       "node.js": process.versions.node
-    });
+    } );
   } );
 
-  routes.get('/', (req, res) => {
+  routes.get( '/', ( req, res ) => {
     //console.log('fetching default');
-    res.sendStatus(200);
-  });
+    res.sendStatus( 200 );
+  } );
 
   routes.post( '/migrate',
     validation.validateParams(),
