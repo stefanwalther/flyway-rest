@@ -59,7 +59,6 @@
     "mocha": "*",
     "nyc": "^8.3.2",
     "promise-retry": "^1.1.1",
-    "superagent": "^2.3.0",
     "supertest": "^2.0.1",
     "supertest-as-promised": "^4.0.2",
     "yargs": "^6.3.0"

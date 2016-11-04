@@ -9,4 +9,5 @@ services:
     environment:
       - FLYWAY_REST_PORT=9001
       - FLYWAY_REST_HOST=flyway_rest
+      - NODE_ENV=production
     command: npm run test

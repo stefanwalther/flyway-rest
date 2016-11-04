@@ -3,14 +3,16 @@ import execa from 'execa';
 export function exec() {
   return function( req, res, next ) {
 
-    let command = buildCommand( req.body.flyway_args, req.body.command );
+    let command = buildCommand( req.body.flyway_args, req.body.action );
 
     let returnResult = {
       mode: req.body.mode,
       cmd: command,
-      ts_start: new Date().toJSON()
+      ts_start: new Date().toJSON(),
+      action: req.body.action
     };
 
+    // Only execute if the mode is not 'simulation'
     if ( returnResult.mode !== 'simulation' ) {
       execa.shell( command )
         .then( result => {
@@ -27,6 +29,7 @@ export function exec() {
 
         } );
     } else {
+      returnResult.status = 'OK';
       finish( next );
     }
 
@@ -39,14 +42,14 @@ export function exec() {
 
 }
 
-export function buildCommand( flyWayArgs, command = 'info' ) {
+export function buildCommand( flyWayArgs, action = 'info' ) {
 
   if ( !flyWayArgs || (typeof flyWayArgs === 'object' && Object.keys( flyWayArgs ).length < 1) ) {
     throw new Error( 'No Flyway args defined.' );
   }
 
-  if ( [ 'clean', 'info', 'validate', 'baseline', 'repair', 'migrate' ].indexOf( command ) <= -1 ) {
-    throw new Error( 'Invalid Flyway command.', command );
+  if ( [ 'clean', 'info', 'validate', 'baseline', 'repair', 'migrate' ].indexOf( action ) <= -1 ) {
+    throw new Error( 'Invalid Flyway action.', action );
   }
 
   var space = ' ';
@@ -55,7 +58,7 @@ export function buildCommand( flyWayArgs, command = 'info' ) {
   for ( const key of Object.keys( flyWayArgs ) ) {
     cmd += space + '-' + key + del + flyWayArgs[ key ];
   }
-  cmd += space + command;
+  cmd += space + action;
   return cmd;
 
 }

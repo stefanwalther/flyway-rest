@@ -15,6 +15,8 @@ services:
     volumes:
       - ./../:/home/app/
     command: "npm run start:dev"
+    environment:
+      - NODE_ENV=development
 
   flyway_pgadmin:
     container_name: "flyway_pgadmin"

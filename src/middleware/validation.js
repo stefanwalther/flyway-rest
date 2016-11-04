@@ -1,6 +1,6 @@
-export function addParams() {
-  return function (req, res, next) {
-    req.body.command = 'clean';
+export function addParams( params ) {
+  return function( req, res, next ) {
+    Object.assign( req.body, params );
     return next();
   }
 }
@@ -25,11 +25,18 @@ export function validateParams() {
       validationErrors.push( 'Argument password is mandatory.' );
     }
 
+    // Check for files
+    if ( req.body.flyway_args && [ 'migrate', 'info', 'validate', 'baseline', 'repair' ].indexOf( req.body.action ) > -1 ) {
+      if ( !req.body.flyway_args.files || !Array.isArray(req.body.flyway_args.files) && !req.body.flyway_args.files.length <= 0 ) {
+        validationErrors.push( 'Action requires files.' );
+      }
+    }
+
     // Todo: Generalize restStatus
     if ( validationErrors.length > 0 ) {
       res.status( 500 );
       res.json( {
-        status: 'Error',
+        status: 'ValidationError',
         errorMsg: 'Validation of parameters failed.',
         isValidationError: true,
         validationErrors: validationErrors

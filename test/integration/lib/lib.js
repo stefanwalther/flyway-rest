@@ -1,7 +1,9 @@
-
 import promiseRetry from 'promise-retry';
+import * as base64 from './../../../src/lib/base64';
+import fs from 'fs';
+import path from 'path';
 
-export function healthcheck( server ) {
+export function healthCheck( server ) {
 
   const check = () => {
 
@@ -26,5 +28,25 @@ export function healthcheck( server ) {
       .catch( retry );
 
   }, retryOpts )
+
+}
+
+/**
+ * Retrieve all files from `folderPath` and returns a file array object containing the base64 encoded value for each file.
+ * @param {String}folderPath - Path of the folder to look for files.
+ * @returns {Array<Object>}
+ */
+export function getFiles( folderPath ) {
+
+  let r = [];
+  let files = fs.readdirSync( folderPath );
+  files.forEach( file => {
+    let f = {
+      name: file,
+      base64: base64.encode(path.join(folderPath, file)),
+    };
+    files.push( f );
+  } );
+  return r;
 
 }

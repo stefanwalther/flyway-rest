@@ -10,3 +10,4 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PWD=postgres
       - POSTGRES_DB=flyway
+      - NODE_ENV=production

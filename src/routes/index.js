@@ -35,32 +35,37 @@ export default ( config ) => {
   } );
 
   routes.post( '/migrate',
+    validation.addParams( { action: 'migrate' } ),
     validation.validateParams(),
     cmd.exec()
   );
 
   routes.post( '/clean',
-    validation.addParams(),
+    validation.addParams( { action: 'clean' } ),
     validation.validateParams(),
     cmd.exec()
   );
 
   routes.post( '/info',
+    validation.addParams( { action: 'info' } ),
     validation.validateParams(),
     cmd.exec()
   );
 
   routes.post( '/validate',
+    validation.addParams( { action: 'validate' } ),
     validation.validateParams(),
     cmd.exec()
   );
 
   routes.post( '/baseline',
+    validation.addParams( { action: 'baseline' } ),
     validation.validateParams(),
     cmd.exec()
   );
 
   routes.post( '/repair',
+    validation.addParams( { action: 'repair' } ),
     validation.validateParams(),
     cmd.exec()
   );
