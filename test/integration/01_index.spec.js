@@ -50,10 +50,10 @@ describe( 'integration-tests:general', () => {
         .expect( 500 )
         .end( ( err, res ) => {
           expect( err ).to.not.exist;
-          expect( res.body ).to.have.a.property( 'error' ).to.be.equal( 'Validation of parameters failed.' );
-          expect( res.body ).to.have.a.property( 'details' );
-          expect( res.body ).to.have.a.property( 'details' ).to.be.an.array;
-          expect( res.body.details ).to.have.length.of( 1 );
+          expect( res.body ).to.have.a.property( 'errorMsg' ).to.be.equal( 'Validation of parameters failed.' );
+          expect( res.body ).to.have.a.property( 'validationErrors' );
+          expect( res.body ).to.have.a.property( 'validationErrors' ).to.be.an.array;
+          expect( res.body.validationErrors ).to.have.length.of( 1 );
           done();
         } )
     } );
@@ -65,7 +65,9 @@ describe( 'integration-tests:general', () => {
         .send( {
           mode: "simulation",
           flyway_args: {
-            url: "bla"
+            url: "bla",
+            user: "foo",
+            password: "bar"
           }
         } )
         .set( 'Accept', 'application/json' )

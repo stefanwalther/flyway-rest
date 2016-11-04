@@ -7,22 +7,32 @@ export function addParams() {
 
 export function validateParams() {
   return function( req, res, next ) {
-    let errors = [];
+    let validationErrors = [];
 
     if ( req.body && !req.body.flyway_args ) {
-      errors.push( 'Missing Flyway arguments.' );
+      validationErrors.push( 'Missing Flyway arguments.' );
     }
 
     if ( req.body.flyway_args && !req.body.flyway_args.url ) {
-      errors.push( 'Argument url is mandatory.' );
+      validationErrors.push( 'Argument url is mandatory.' );
+    }
+
+    if ( req.body.flyway_args && !req.body.flyway_args.user ) {
+      validationErrors.push( 'Argument user is mandatory.' );
+    }
+
+    if ( req.body.flyway_args && !req.body.flyway_args.password ) {
+      validationErrors.push( 'Argument password is mandatory.' );
     }
 
     // Todo: Generalize restStatus
-    if ( errors.length > 0 ) {
+    if ( validationErrors.length > 0 ) {
       res.status( 500 );
       res.json( {
-        error: 'Validation of parameters failed.',
-        details: errors
+        status: 'Error',
+        errorMsg: 'Validation of parameters failed.',
+        isValidationError: true,
+        validationErrors: validationErrors
       } );
       res.end();
     } else {

@@ -29,6 +29,10 @@
   - `Error` - An error occurred, see `error` for more details.
 - **`mode`** - The execution mode as passed in.
 - **`cmd`** - The CLI command as generated, based on the input arguments.
+- errorMsg
+- isValidationError
+- validationErrors
+
 - **`error`**
   - `message`
   - `details`

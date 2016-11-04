@@ -25,7 +25,7 @@ describe( 'integration-tests:clean', () => {
         .expect( 500 );
     } );
 
-    it( 'properly cleans the db', ( done ) => {
+    it( 'properly cleans the db (user & pwd separate)', ( done ) => {
 
       var args = {
         mode: 'sync',
@@ -46,6 +46,48 @@ describe( 'integration-tests:clean', () => {
           done();
         } )
     } );
+
+    it('returns an error if user and password is not passed', ( done ) => {
+      var args = {
+        mode: 'sync',
+        flyway_args: {
+          url: `jdbc:postgresql://flyway_rest_db:5432/foo`
+        }
+      };
+
+      server
+        .post( '/clean' )
+        .send( args )
+        .expect( 500 )
+        .end( ( err, res ) => {
+          expect( res.body.status).to.equal('Error');
+          expect( res.body.errorMsg ).to.exist;
+          expect( res.body.errorMsg ).to.equal('Validation of parameters failed.');
+          expect( res.body.validationErrors).to.contain('Argument user is mandatory.');
+          done();
+        } )
+    });
+
+    it('returns an error if the db is unknown', (done) => {
+      var args = {
+        mode: 'sync',
+        flyway_args: {
+          url: `jdbc:postgresql://flyway_rest_db:5432/foo`,
+          user: 'postgres',
+          password: 'postgres'
+        }
+      };
+
+      server
+        .post( '/clean' )
+        .send( args )
+        .expect( 500 )
+        .end( ( err, res ) => {
+          expect( res.body.stderr ).to.exist;
+          expect( res.body.stdout ).to.not.exist;
+          done();
+        } )
+    })
 
   } );
 
