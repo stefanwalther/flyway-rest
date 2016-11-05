@@ -1,5 +1,4 @@
 /*global describe, expect, it, afterEach, before, beforeEach*/
-import supertest from 'supertest-as-promised';
 import * as lib from './lib/lib';
 
 
@@ -13,16 +12,26 @@ describe( 'integration-tests:general', () => {
   console.log( 'Flyway Rest URL: ', FLYWAY_REST_URL, '\n' );
 
   before( () => {
-    if ( process.env.DEBUG ) {
-      console.log('debug');
-      server = supertest.agent( FLYWAY_REST_URL );
-    } else {
-      server = supertest.agent( FLYWAY_REST_URL );
-    }
 
-    return lib.healthCheck( server );
+    var opts = {
+      debug: false,
+      url: FLYWAY_REST_URL
+    };
+
+    return lib.connect( opts )
+      .then( result => {
+        server = result;
+      } )
+      .catch( ( err ) => {
+        throw new Error( err );
+      } )
 
   } );
+
+  beforeEach( () => {
+    return lib.healthCheck( server );
+  } );
+
 
   describe( 'general setup', () => {
     it( 'can ping the REST service (/)', ( /*done*/ ) => {
@@ -59,11 +68,7 @@ describe( 'integration-tests:general', () => {
   } );
 
   describe( 'POST /baseline', () => {
-    it( 'checks required params', () => {
-      return server
-        .post( '/baseline' )
-        .expect( 500 );
-    } )
+
   } );
 
   describe( 'POST /repair', () => {

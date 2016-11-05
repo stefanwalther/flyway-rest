@@ -1,9 +1,6 @@
 /*global describe, expect, it, afterEach, before, beforeEach*/
-import supertest from 'supertest-as-promised';
 import * as lib from './lib/lib';
 import path from 'path';
-import appServer from './../../src/app-server';
-import * as base64 from './../../src/lib/base64';
 
 describe( 'POST /migrate', () => {
 
@@ -12,21 +9,22 @@ describe( 'POST /migrate', () => {
   const FLYWAY_REST_HOST = process.env.FLYWAY_REST_HOST || 'localhost';
   const FLYWAY_REST_URL = `http://${FLYWAY_REST_HOST}:${FLYWAY_REST_PORT}`;
 
-  console.log( 'Flyway Rest URL: ', FLYWAY_REST_URL, '\n' );
+  //console.log( 'Flyway Rest URL: ', FLYWAY_REST_URL, '\n' );
 
-  before( done => {
-    //if ( process.env.NODE_ENV === 'production' ) {
-    //  console.log( 'production' );
-    server = supertest.agent( FLYWAY_REST_URL );
-    done();
-    //} else {
-    //  console.log( 'development' );
-    //  let expressApp = new appServer();
-    //  expressApp.start( () => {
-    //    server = supertest( expressApp.expressApp );
-    //    done();
-    //  } );
-    //}
+  before( () => {
+
+    var opts = {
+      debug: false,
+      url: FLYWAY_REST_URL
+    };
+
+    return lib.connect( opts )
+      .then( result => {
+        server = result;
+      } )
+      .catch( ( err ) => {
+        throw new Error( err );
+      } )
 
   } );
 
@@ -88,7 +86,7 @@ describe( 'POST /migrate', () => {
           url: "bla",
           user: "foo",
           password: "bar",
-          files: lib.getFiles( path.resolve( __dirname, './fixtures/dummy-files') )
+          files: lib.getFiles( path.resolve( __dirname, './fixtures/dummy-files' ) )
         }
       } )
       .set( 'Accept', 'application/json' )
@@ -109,7 +107,7 @@ describe( 'POST /migrate', () => {
         user: 'foo',
         password: 'bar',
         url: 'baz',
-        files: lib.getFiles( path.resolve( __dirname, './fixtures/dummy-files') )
+        files: lib.getFiles( path.resolve( __dirname, './fixtures/dummy-files' ) )
       }
     };
 
@@ -131,7 +129,7 @@ describe( 'POST /migrate', () => {
         user: 'foo',
         password: 'bar',
         url: 'baz',
-        files: lib.getFiles( path.resolve( __dirname, './fixtures/dummy-files') )
+        files: lib.getFiles( path.resolve( __dirname, './fixtures/dummy-files' ) )
       }
     };
 
