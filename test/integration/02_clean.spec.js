@@ -1,6 +1,5 @@
 /*global describe, expect, it, afterEach, before, beforeEach*/
 import * as lib from './lib/lib';
-import path from 'path';
 
 describe( 'POST /clean', () => {
 
@@ -66,7 +65,7 @@ describe( 'POST /clean', () => {
     var args = {
       mode: 'sync',
       flyway_args: {
-        url: `jdbc:postgresql://flyway_rest_db:5432/flyway`,
+        url: 'jdbc:postgresql://flyway_rest_db:5432/flyway',
         user: 'postgres',
         password: 'postgres'
       }
@@ -87,7 +86,7 @@ describe( 'POST /clean', () => {
     var args = {
       mode: 'sync',
       flyway_args: {
-        url: `jdbc:postgresql://flyway_rest_db:5432/foo`
+        url: 'jdbc:postgresql://flyway_rest_db:5432/foo'
       }
     };
 
@@ -107,7 +106,7 @@ describe( 'POST /clean', () => {
     var args = {
       mode: 'sync',
       flyway_args: {
-        url: `jdbc:postgresql://flyway_rest_db:5432/foo`,
+        url: 'jdbc:postgresql://flyway_rest_db:5432/foo',
         user: 'postgres',
         password: 'postgres'
       }

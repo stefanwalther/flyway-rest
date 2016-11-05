@@ -43,7 +43,7 @@ describe( 'POST /migrate', () => {
     var args = {
       mode: 'sync',
       flyway_args: {
-        url: `jdbc:postgresql://flyway_rest_db:5432/flyway`,
+        url: 'jdbc:postgresql://flyway_rest_db:5432/flyway',
         user: 'postgres',
         password: 'postgres'
       }
@@ -81,11 +81,11 @@ describe( 'POST /migrate', () => {
     server
       .post( '/migrate' )
       .send( {
-        mode: "simulation",
+        mode: 'simulation',
         flyway_args: {
-          url: "bla",
-          user: "foo",
-          password: "bar",
+          url: 'bla',
+          user: 'foo',
+          password: 'bar',
           files: lib.getFiles( path.resolve( __dirname, './fixtures/dummy-files' ) )
         }
       } )

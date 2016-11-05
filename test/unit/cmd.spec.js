@@ -1,13 +1,13 @@
-/*global describe, it, beforeEach, before, after, afterEach */
+/*global expect, describe, it, beforeEach, before, after, afterEach */
 import * as cmd from './../../src/middleware/cmd';
 
-describe( 'cli:buildCommand', ()=> {
+describe( 'cli:buildCommand', () => {
 
-  it( 'throws an error if no args are defined.', ()=> {
+  it( 'throws an error if no args are defined.', () => {
     expect( cmd.buildCommand.bind( null, null ) ).to.throw( 'No Flyway args defined.' );
   } );
 
-  it( 'Returns a command if flyway args are passed.', ()=> {
+  it( 'Returns a command if flyway args are passed.', () => {
     expect( cmd.buildCommand.bind( null, { url: 'foo' } ) ).not.to.throw( Error );
     expect( cmd.buildCommand( { url: 'foo' } ) ).to.be.equal( 'flyway -url=foo info' );
   } );

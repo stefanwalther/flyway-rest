@@ -1,3 +1,4 @@
+/* eslint-disable */
 /*global describe, expect, it, afterEach, before, beforeEach*/
 import * as lib from './lib/lib';
 import path from 'path';
@@ -31,6 +32,5 @@ describe( 'POST /xx', () => {
   beforeEach( () => {
     return lib.healthCheck( server );
   } );
-
 
 } );

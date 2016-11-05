@@ -2,7 +2,7 @@ import promiseRetry from 'promise-retry';
 import * as base64 from './../../../src/lib/base64';
 import fs from 'fs';
 import path from 'path';
-import ExpressServer from './../../../src/app-server';
+//import ExpressServer from './../../../src/app-server';
 import supertest from 'supertest-as-promised';
 
 export function healthCheck( server ) {
@@ -64,7 +64,7 @@ export function getFiles( folderPath ) {
  */
 export function connect( opts ) {
 
-  return new Promise( ( resolve, reject ) => {
+  return new Promise( ( resolve /*, reject*/ ) => { //eslint-disable-line no-inline-comments
     resolve( supertest.agent( opts.url ) );
   } );
 
@@ -89,7 +89,7 @@ export function getBaseArgs() {
 
   return {
     flyway_args: {
-      url: `jdbc:postgresql://flyway_rest_db:5432/flyway`,
+      url: 'jdbc:postgresql://flyway_rest_db:5432/flyway',
       user: 'postgres',
       password: 'postgres'
     }

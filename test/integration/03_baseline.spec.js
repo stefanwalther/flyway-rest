@@ -45,7 +45,7 @@ describe( 'POST /baseline', () => {
     var args = {
       mode: 'simulation',
       flyway_args: {
-        url: `jdbc:postgresql://flyway_rest_db:5432/flyway`,
+        url: 'jdbc:postgresql://flyway_rest_db:5432/flyway',
         user: 'postgres',
         password: 'postgres'
       }
@@ -55,7 +55,7 @@ describe( 'POST /baseline', () => {
       .post( '/baseline' )
       .send( args )
       .expect( 200 )
-      .end( ( err, res ) => {
+      .end( ( err /*, res*/ ) => { //eslint-disable-line no-inline-comments
         expect( err ).to.not.exist;
         done();
       } )

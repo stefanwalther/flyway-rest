@@ -1,6 +1,7 @@
-/*global describe, expect, it, afterEach, before, beforeEach*/
+/* eslint-disable no-inline-comments */
+/*global describe, it, afterEach, before, beforeEach*/
+/* eslint-enable no-inline-comments */
 import * as lib from './lib/lib';
-
 
 describe( 'integration-tests:general', () => {
 
@@ -34,7 +35,7 @@ describe( 'integration-tests:general', () => {
 
 
   describe( 'general setup', () => {
-    it( 'can ping the REST service (/)', ( /*done*/ ) => {
+    it( 'can ping the REST service (/)', ( /*done*/ ) => { //eslint-disable-line no-inline-comments
 
       return server
         .get( '/' )

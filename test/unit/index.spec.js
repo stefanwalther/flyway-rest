@@ -8,11 +8,11 @@ describe( 'unit:appServer', () => {
     appInst = new appServer();
   } );
 
-  it( 'should have a method `start`', ()=> {
+  it( 'should have a method `start`', () => {
     expect( appInst ).to.have.a.property( 'start' ).that.is.a.function;
   } );
 
-  it( 'should have a method `stop`', ()=> {
+  it( 'should have a method `stop`', () => {
     expect( appInst ).to.have.a.property( 'stop' ).that.is.a.function;
   } );
 } );
