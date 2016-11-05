@@ -28,7 +28,7 @@ export function validateParams() {
     // Check for files for all actions except
     //  - baseline
     if ( req.body.flyway_args && [ 'migrate', 'info', 'validate', 'repair' ].indexOf( req.body.action ) > -1 ) {
-      if ( !req.body.flyway_args.files || !Array.isArray(req.body.flyway_args.files) && !req.body.flyway_args.files.length <= 0 ) {
+      if ( !req.body.flyway_args.files || !Array.isArray( req.body.flyway_args.files ) && !req.body.flyway_args.files.length <= 0 ) {
         validationErrors.push( 'Action requires files.' );
       }
     }

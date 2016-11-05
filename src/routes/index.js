@@ -4,7 +4,7 @@ import * as cmd from './../middleware/cmd';
 import pkg from './../../package.json';
 
 // Todo: config not being used right now ...
-export default ( config ) => {
+export default ( /*config*/ ) => { // eslint-disable-line no-inline-comments
   let routes = Router();
 
   routes.get( '/', ( req, res ) => {
@@ -25,7 +25,7 @@ export default ( config ) => {
 
   routes.get( '/info', ( req, res ) => {
     res.json( {
-      "node.js": process.versions.node
+      'node.js': process.versions.node
     } );
   } );
 

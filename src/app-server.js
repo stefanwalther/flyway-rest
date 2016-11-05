@@ -42,7 +42,7 @@ export default class appServer {
         if ( !err ) {
           console.log( `Started on port ${port}.` );
         } else {
-          console.log( `Cannot start server.`, err );
+          console.log( 'Cannot start server.', err );
         }
         return done();
       } );

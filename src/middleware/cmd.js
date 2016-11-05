@@ -44,7 +44,7 @@ export function exec() {
 
 export function buildCommand( flyWayArgs, action = 'info' ) {
 
-  if ( !flyWayArgs || (typeof flyWayArgs === 'object' && Object.keys( flyWayArgs ).length < 1) ) {
+  if ( !flyWayArgs || ( typeof flyWayArgs === 'object' && Object.keys( flyWayArgs ).length < 1 ) ) {
     throw new Error( 'No Flyway args defined.' );
   }
 
@@ -52,9 +52,9 @@ export function buildCommand( flyWayArgs, action = 'info' ) {
     throw new Error( 'Invalid Flyway action.', action );
   }
 
-  var space = ' ';
+  let space = ' ';
   let del = '=';
-  var cmd = 'flyway';
+  let cmd = 'flyway';
   for ( const key of Object.keys( flyWayArgs ) ) {
     cmd += space + '-' + key + del + flyWayArgs[ key ];
   }

@@ -1,7 +1,7 @@
 /*global describe, expect, it, afterEach, before, beforeEach*/
 import * as lib from './lib/lib';
 
-describe.only( 'POST /baseline', () => {
+describe( 'POST /baseline', () => {
 
   var server = null;
   const FLYWAY_REST_PORT = process.env.FLYWAY_REST_PORT || 9001;
