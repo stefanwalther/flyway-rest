@@ -70,6 +70,7 @@ export function buildCommand( flyWayArgs, action = 'info', locations ) {
   let space = ' ';
   let del = '=';
   let cmd = 'flyway';
+  cmd += space + '-q'; //Suppress all output, except warnings and errors
   for ( const key of Object.keys( flyWayArgs ) ) {
     cmd += space + '-' + key + del + flyWayArgs[ key ];
   }
