@@ -1,8 +1,9 @@
 /*global describe, expect, it, afterEach, before, beforeEach*/
 import * as lib from './lib/lib';
 import path from 'path';
+import _ from 'lodash';
 
-describe( 'POST /migrate', () => {
+describe.only( 'POST /migrate', () => {
 
   var server = null;
   const FLYWAY_REST_PORT = process.env.FLYWAY_REST_PORT || 9001;
@@ -72,7 +73,7 @@ describe( 'POST /migrate', () => {
         expect( res.body ).to.have.a.property( 'errorMsg' ).to.be.equal( 'Validation of parameters failed.' );
         expect( res.body ).to.have.a.property( 'validationErrors' );
         expect( res.body ).to.have.a.property( 'validationErrors' ).to.be.an.array;
-        expect( res.body.validationErrors ).to.have.length.of( 1 );
+        expect( res.body.validationErrors ).to.have.length.of.least( 1 );
         done();
       } )
   } );
@@ -85,9 +86,9 @@ describe( 'POST /migrate', () => {
         flyway_args: {
           url: 'bla',
           user: 'foo',
-          password: 'bar',
-          files: lib.getFiles( path.resolve( __dirname, './fixtures/dummy-files' ) )
-        }
+          password: 'bar'
+        },
+        files: lib.getFiles( path.resolve( __dirname, './fixtures/dummy-files' ) )
       } )
       .set( 'Accept', 'application/json' )
       .expect( 200 )
@@ -99,16 +100,16 @@ describe( 'POST /migrate', () => {
       } )
   } );
 
-  it( 'should return the action `clean` (if not set)', done => {
+  it( 'should return the action `migrate` (if not set)', done => {
 
     var args = {
       mode: 'simulate',
       flyway_args: {
         user: 'foo',
         password: 'bar',
-        url: 'baz',
-        files: lib.getFiles( path.resolve( __dirname, './fixtures/dummy-files' ) )
-      }
+        url: 'baz'
+      },
+      files: lib.getFiles( path.resolve( __dirname, './fixtures/dummy-files' ) )
     };
 
     server
@@ -129,9 +130,27 @@ describe( 'POST /migrate', () => {
         user: 'foo',
         password: 'bar',
         url: 'baz',
-        files: lib.getFiles( path.resolve( __dirname, './fixtures/dummy-files' ) )
-      }
+      },
+      files: lib.getFiles( path.resolve( __dirname, './fixtures/dummy-files' ) )
     };
+
+    server
+      .post( '/migrate' )
+      .send( args )
+      .expect( 200 )
+      .end( ( err, res ) => {
+        expect( res.body.status ).to.be.equal( 'OK' );
+        expect( res.body.action ).to.be.equal( 'migrate' );
+        done();
+      } )
+  } );
+
+  it.only( 'should successfully migrate', done => {
+    let args = lib.getBaseArgs();
+    args = _.merge( args, {
+      flyway_args: {},
+      files: lib.getFiles( path.resolve( __dirname, './fixtures/migrate-basic' ) )
+    } );
 
     server
       .post( '/migrate' )
@@ -144,4 +163,5 @@ describe( 'POST /migrate', () => {
       } )
   } )
 
-} );
+} )
+;

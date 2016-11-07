@@ -7,6 +7,7 @@
  *			collection.find({}, toRes(res));
  *		}
  */
+//Todo: Not used, so probably remove
 export function toRes( res, status = 200 ) {
   return ( err, thing ) => {
     if ( err ) {

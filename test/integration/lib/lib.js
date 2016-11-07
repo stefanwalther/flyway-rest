@@ -2,8 +2,9 @@ import promiseRetry from 'promise-retry';
 import * as base64 from './../../../src/lib/base64';
 import fs from 'fs';
 import path from 'path';
-//import ExpressServer from './../../../src/app-server';
+import ExpressServer from './../../../src/app-server';
 import supertest from 'supertest-as-promised';
+import _ from 'lodash';
 
 export function healthCheck( server ) {
 
@@ -47,7 +48,7 @@ export function getFiles( folderPath ) {
       name: file,
       base64: base64.encode( path.join( folderPath, file ) ),
     };
-    files.push( f );
+    r.push( f );
   } );
   return r;
 
@@ -65,20 +66,15 @@ export function getFiles( folderPath ) {
 export function connect( opts ) {
 
   return new Promise( ( resolve /*, reject*/ ) => { //eslint-disable-line no-inline-comments
-    resolve( supertest.agent( opts.url ) );
+    if ( !opts.debug ) {
+      resolve( supertest.agent( opts.url ) );
+    } else {
+      let expressInst = new ExpressServer();
+      expressInst.start( () => {
+        resolve( supertest( expressInst.expressApp ) );
+      } );
+    }
   } );
-
-  //if ( !opts.debug ) {
-  //  server = supertest.agent( opts.url );
-  //  cb();
-  //} else {
-  //  let expressInst = new ExpressServer();
-  //  expressInst.start( () => {
-  //    server = supertest( expressInst.expressApp );
-  //    cb();
-  //  } );
-  //}
-
 }
 
 /**
