@@ -7,8 +7,6 @@
 **Example: `*
 ```js
   {
-    "flyway": "4.0.3",
-    "nvm": "v0.32.1",
     "node.js", "6.9.1"
   }
 ```
@@ -18,9 +16,9 @@
 - **`mode`** - The execution mode. The following values are possible:
   - `simulation` - Does not execute the command, just validates and processes the request and returns the generated command (see `cmd` in the result).
   - `sync` - Executes the command synchronously and returns the result
-  - `async` - Executes the command, but returns immediately a result
 - **`command` - Only applicable for endpoint `/go`: Can any of  `clean`
 - **`flyway_args`** - Flyway arguments as used in ["Flyway Command-line"](https://flywaydb.org/documentation/commandline/)
+- **`files`** - 
 
 **Result**
 
@@ -31,7 +29,6 @@
 - **`mode`** - The execution mode as passed in.
 - **`cmd`** - The CLI command as generated, based on the input arguments.
 - errorMsg
-- isValidationError
 - validationErrors
 
 - **`error`**

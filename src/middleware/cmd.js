@@ -68,7 +68,7 @@ export function buildCommand( flyWayArgs, action = 'info', locations ) {
   }
 
   if (locations) {
-    cmd += space + '-locations' + del + locations;
+    cmd += space + '-locations' + del + `filesystem:${locations}` ;
   }
 
   cmd += space + action;
