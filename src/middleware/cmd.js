@@ -7,15 +7,15 @@ export function exec() {
   return function( req, res, next ) {
 
     let args = req.body.flyway_args; //shortcut
-    let tmpDir = extractFiles( req.body.files ); //Todo: Do not save the files in case of `simulation`
-    let command = buildCommand( args, req.body.action, tmpDir );
+    let tmpDirObj = extractFiles( req.body.files ); //Todo: Do not save the files in case of `simulation`
+    let command = buildCommand( args, req.body.action, tmpDirObj.name );
 
     let returnResult = {
       mode: req.body.mode,
       cmd: command,
       ts_start: new Date().toJSON(),
       action: req.body.action,
-      tmpDir: tmpDir,
+      tmpDir: tmpDirObj.name,
       postedFiles: req.body.files // Todo: Could be removed, just for debugging purposes
     };
 
@@ -43,6 +43,13 @@ export function exec() {
 
     //Todo: Potentially break out to ./lib/restStatus.js
     function finish( next ) {
+
+      // Todo: Could be necessary to catch any errors here (see manual for `tmp`)
+      // Delete the temporary files
+      if (tmpDirObj && typeof tmpDirObj.removeCallback === 'function') {
+        tmpDirObj.removeCallback();
+      }
+
       res.json( returnResult );
       next();
     }
@@ -67,8 +74,8 @@ export function buildCommand( flyWayArgs, action = 'info', locations ) {
     cmd += space + '-' + key + del + flyWayArgs[ key ];
   }
 
-  if (locations) {
-    cmd += space + '-locations' + del + `filesystem:${locations}` ;
+  if ( locations ) {
+    cmd += space + '-locations' + del + `filesystem:${locations}`;
   }
 
   cmd += space + action;
@@ -85,12 +92,12 @@ export function extractFiles( filesObj ) {
 
   let tmpDirObj;
   if ( filesObj && Array.isArray( filesObj ) && filesObj.length > 0 ) {
-    tmpDirObj = tmp.dirSync();
+    tmpDirObj = tmp.dirSync( { unsafeCleanup: true } );
     console.log( tmpDirObj, tmpDirObj );
     filesObj.forEach( fileDef => {
       base64.decode( fileDef.base64, path.join( tmpDirObj.name, fileDef.name ) );
     } );
-  return tmpDirObj.name;
+    return tmpDirObj;
   }
   return null;
 }
