@@ -16,7 +16,6 @@
 - **`mode`** - The execution mode. The following values are possible:
   - `simulation` - Does not execute the command, just validates and processes the request and returns the generated command (see `cmd` in the result).
   - `sync` - Executes the command synchronously and returns the result
-- **`command` - Only applicable for endpoint `/go`: Can any of  `clean`
 - **`flyway_args`** - Flyway arguments as used in ["Flyway Command-line"](https://flywaydb.org/documentation/commandline/)
 - **`files`** - 
 

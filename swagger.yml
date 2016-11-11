@@ -1,0 +1,94 @@
+---
+swagger: '2.0'
+info:
+  version: 0.0.2
+  title: flyway-rest
+  description: REST interface for flyway (http://flywaydb.org)
+paths:
+  /info:
+    get:
+      description: |
+        Returns the details and status information about all the migrations.
+
+        [Official Documentation](https://flywaydb.org/documentation/commandline/info)
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: Configuration
+          description: Configuration object
+          required: true
+          schema:
+            $ref: "#/definitions/configuration"
+      responses:
+        200:
+          description: OK
+  /clean:
+    post:
+      responses:
+        200:
+          description: OK
+  /migrate:
+    post:
+      responses:
+        200:
+          description: OK
+  /validate:
+    post:
+      responses:
+        200:
+          description: OK
+definitions:
+  configuration:
+    type: object
+    properties:
+      mode:
+        type: string
+        description: the mode
+        enum:
+          - simulation
+          - sync
+      files:
+        description: Files to use for the FlywayDB action.
+        type: array
+        items:
+          $ref: "#/definitions/fileDef"
+      flyway_args:
+        type: object
+        properties:
+          test:
+            type: string
+  fileDef:
+    properties:
+      name:
+        type: string
+        description: Name of the file.
+      base64:
+        type: string
+        description: base64 string of the file's content.
+  result:
+    properties:
+      status:
+        type: string
+        enum:
+          - OK
+          - Error
+      mode:
+        type: string
+        description: The mode of the request.
+        enum:
+          - simulation
+          - sync
+      cmd:
+        type: string
+        description: The command to be executed.
+      validationErrors:
+        type: array
+        items:
+          $ref: "#/definitions/validationErrors"
+  validationErrors:
+    type: string
+
+
