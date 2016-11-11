@@ -1,15 +1,8 @@
 version: '2'
 services:
 
-  flyway_rest_db:
-    extends:
-      file: ./docker/flyway_rest_db/docker-compose.yml
-      service: flyway_rest_db
-
   flyway_rest:
     extends:
       file: ./docker/flyway_rest/docker-compose.yml
       service: flyway_rest
-    links:
-      - flyway_rest_db
 

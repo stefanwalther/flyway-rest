@@ -80,6 +80,7 @@ definitions:
         enum:
           - OK
           - Error
+          - ValidationError
       action:
         type: string
         enum:
