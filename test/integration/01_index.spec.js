@@ -33,6 +33,8 @@ describe( 'integration-tests:general', () => {
 
 
   describe( 'general setup', () => {
+
+    // Should probably just redirect to /openapi
     it( 'can ping the REST service (/)', ( /*done*/ ) => { //eslint-disable-line no-inline-comments
 
       return server
@@ -41,6 +43,7 @@ describe( 'integration-tests:general', () => {
 
     } );
 
+    //Todo: extend that check
     xit( '/ should return some general pkg information', done => {
       server
         .get( '/' )
@@ -62,18 +65,6 @@ describe( 'integration-tests:general', () => {
     it( 'checks required params', () => {
       return server
         .post( '/validate' )
-        .expect( 500 );
-    } )
-  } );
-
-  describe( 'POST /baseline', () => {
-
-  } );
-
-  describe( 'POST /repair', () => {
-    it( 'checks required params', () => {
-      return server
-        .post( '/repair' )
         .expect( 500 );
     } )
   } );

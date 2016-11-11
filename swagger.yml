@@ -35,6 +35,11 @@ paths:
       responses:
         200:
           description: OK
+  /repair:
+    post:
+      responses:
+        200:
+          description: OK
   /validate:
     post:
       responses:
