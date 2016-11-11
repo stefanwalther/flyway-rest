@@ -48,7 +48,7 @@ definitions:
         type: string
         description: the mode
         enum:
-          - simulation
+          - get-cmd
           - sync
       files:
         description: Files to use for the FlywayDB action.
@@ -75,11 +75,16 @@ definitions:
         enum:
           - OK
           - Error
+      action:
+        type: string
+        enum:
+          - clean
+          #Todo: Add the other actions here
       mode:
         type: string
         description: The mode of the request.
         enum:
-          - simulation
+          - get-cmd
           - sync
       cmd:
         type: string

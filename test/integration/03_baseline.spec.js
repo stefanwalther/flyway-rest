@@ -43,7 +43,7 @@ describe( 'POST /baseline', () => {
   it( 'does not require files', done => {
 
     var args = {
-      mode: 'simulation',
+      mode: 'get-cmd',
       flyway_args: {
         url: 'jdbc:postgresql://flyway_rest_db:5432/flyway',
         user: 'postgres',

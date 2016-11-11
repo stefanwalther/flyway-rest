@@ -31,7 +31,6 @@ describe( 'POST /clean', () => {
     return lib.healthCheck( server );
   } );
 
-
   it( 'checks required params', () => {
 
     return server
@@ -42,7 +41,7 @@ describe( 'POST /clean', () => {
   it( 'contains the correct action (if not set)', done => {
 
     var args = {
-      mode: 'simulate',
+      mode: 'get-cmd',
       flyway_args: {
         user: 'foo',
         password: 'bar',
@@ -55,6 +54,7 @@ describe( 'POST /clean', () => {
       .send( args )
       .expect( 200 )
       .end( ( err, res ) => {
+        expect( err ).to.not.exist;
         expect( res.body.action ).to.be.equal( 'clean' );
         done();
       } )
@@ -76,6 +76,7 @@ describe( 'POST /clean', () => {
       .send( args )
       .expect( 200 )
       .end( ( err, res ) => {
+        expect( err ).to.not.exist;
         expect( res.body.stderr ).to.not.exist;
         expect( res.body.stdout ).to.exist;
         done();
@@ -95,6 +96,7 @@ describe( 'POST /clean', () => {
       .send( args )
       .expect( 500 )
       .end( ( err, res ) => {
+        expect( err ).to.not.exist;
         expect( res.body.status ).to.equal( 'ValidationError' );
         expect( res.body.errorMsg ).to.exist.and.to.be.equal( 'Validation of parameters failed.' );
         expect( res.body.validationErrors ).to.contain( 'Argument user is mandatory.' );
@@ -117,6 +119,7 @@ describe( 'POST /clean', () => {
       .send( args )
       .expect( 500 )
       .end( ( err, res ) => {
+        expect( err ).to.not.exist;
         expect( res.body.stderr ).to.exist;
         expect( res.body.stdout ).to.not.exist;
         done();

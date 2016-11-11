@@ -7,20 +7,20 @@ export function exec() {
   return function( req, res, next ) {
 
     let args = req.body.flyway_args; //shortcut
-    let tmpDirObj = extractFiles( req.body.files ); //Todo: Do not save the files in case of `simulation`
-    let command = buildCommand( args, req.body.action, tmpDirObj.name );
+    let tmpDirObj = extractFiles( req.body.files ); //Todo: Do not save the files in case of `get-cmd`
+    let command = buildCommand( args, req.body.action, tmpDirObj ? tmpDirObj.name : '' );
 
     let returnResult = {
       mode: req.body.mode,
       cmd: command,
       ts_start: new Date().toJSON(),
       action: req.body.action,
-      tmpDir: tmpDirObj.name,
+      tmpDir: tmpDirObj ? tmpDirObj.name : '',
       postedFiles: req.body.files // Todo: Could be removed, just for debugging purposes
     };
 
-    // Only execute if the mode is not 'simulation'
-    if ( returnResult.mode !== 'simulation' ) {
+    // Only execute if the mode is not 'get-cmd'
+    if ( returnResult.mode !== 'get-cmd' ) {
 
       execa.shell( command )
         .then( result => {
@@ -34,7 +34,6 @@ export function exec() {
           returnResult.stderr = error;
           res.status( 500 );
           finish( next );
-
         } );
     } else {
       returnResult.status = 'OK';

@@ -25,7 +25,7 @@
 **Post parameters**
 
 * **`mode`** - The execution mode. The following values are possible:
-  - `simulation` - Does not execute the command, just returns the generated command (see `cmd` in the result).
+  - `get-cmd` - Does not execute the command, just returns the generated command (see `cmd` in the result).
   - `sync` - Executes the command synchronously and returns the result
   - `async` - Executes the command, but returns immediately a result
 * **`command` - Only applicable for endpoint `/go`: Can any of  `clean`

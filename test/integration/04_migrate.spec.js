@@ -3,7 +3,7 @@ import * as lib from './lib/lib';
 import path from 'path';
 import _ from 'lodash';
 
-describe.only( 'POST /migrate', () => {
+describe( 'POST /migrate', () => {
 
   var server = null;
   const FLYWAY_REST_PORT = process.env.FLYWAY_REST_PORT || 9001;
@@ -78,11 +78,11 @@ describe.only( 'POST /migrate', () => {
       } )
   } );
 
-  it( 'should return the correct mode `simulation`', done => {
+  it( 'should return the correct mode `get-cmd`', done => {
     server
       .post( '/migrate' )
       .send( {
-        mode: 'simulation',
+        mode: 'get-cmd',
         flyway_args: {
           url: 'bla',
           user: 'foo',
@@ -95,7 +95,7 @@ describe.only( 'POST /migrate', () => {
       .end( ( err, res ) => {
         expect( err ).to.not.exist;
         expect( res.body ).to.have.property( 'mode' );
-        expect( res.body.mode ).to.equal( 'simulation' );
+        expect( res.body.mode ).to.equal( 'get-cmd' );
         done();
       } )
   } );
@@ -103,7 +103,7 @@ describe.only( 'POST /migrate', () => {
   it( 'should return the action `migrate` (if not set)', done => {
 
     var args = {
-      mode: 'simulate',
+      mode: 'get-cmd',
       flyway_args: {
         user: 'foo',
         password: 'bar',
@@ -117,6 +117,7 @@ describe.only( 'POST /migrate', () => {
       .send( args )
       .expect( 200 )
       .end( ( err, res ) => {
+        expect( err ).to.not.exist;
         expect( res.body.action ).to.be.equal( 'migrate' );
         done();
       } )
@@ -125,7 +126,7 @@ describe.only( 'POST /migrate', () => {
   it( 'successfully uploads files', done => {
 
     var args = {
-      mode: 'simulation',
+      mode: 'get-cmd',
       flyway_args: {
         user: 'foo',
         password: 'bar',
@@ -139,13 +140,14 @@ describe.only( 'POST /migrate', () => {
       .send( args )
       .expect( 200 )
       .end( ( err, res ) => {
+        expect( err ).to.not.exist;
         expect( res.body.status ).to.be.equal( 'OK' );
         expect( res.body.action ).to.be.equal( 'migrate' );
         done();
       } )
   } );
 
-  it.only( 'should successfully migrate', done => {
+  it( 'should successfully migrate', done => {
     let args = lib.getBaseArgs();
     args = _.merge( args, {
       flyway_args: {},
@@ -157,6 +159,7 @@ describe.only( 'POST /migrate', () => {
       .send( args )
       .expect( 200 )
       .end( ( err, res ) => {
+        expect( err ).to.not.exist;
         expect( res.body.status ).to.be.equal( 'OK' );
         expect( res.body.action ).to.be.equal( 'migrate' );
         done();
