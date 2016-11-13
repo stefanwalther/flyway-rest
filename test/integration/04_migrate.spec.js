@@ -6,13 +6,13 @@ import * as config from './lib/config';
 
 describe( 'POST /migrate', () => {
 
-  var server = null;
+  let server = null;
 
   //console.log( 'Flyway Rest URL: ', config.FLYWAY_REST_URL, '\n' );
 
   before( () => {
 
-    var opts = {
+    let opts = {
       debug: false,
       url: config.FLYWAY_REST_URL
     };
@@ -31,15 +31,9 @@ describe( 'POST /migrate', () => {
     return lib.healthCheck( server );
   } );
 
-  it( 'checks required params', () => {
-    return server
-      .post( '/migrate' )
-      .expect( 500 );
-  } );
-
   it( 'requires files to be defined', done => {
 
-    var args = {
+    let args = {
       mode: 'sync',
       flyway_args: {
         url: 'jdbc:postgresql://flyway_rest_db:5432/flyway',
@@ -100,7 +94,7 @@ describe( 'POST /migrate', () => {
 
   it( 'should return the action `migrate` (if not set)', done => {
 
-    var args = {
+    let args = {
       mode: 'get-cmd',
       flyway_args: {
         user: 'foo',
@@ -123,7 +117,7 @@ describe( 'POST /migrate', () => {
 
   it( 'successfully uploads files', done => {
 
-    var args = {
+    let args = {
       mode: 'get-cmd',
       flyway_args: {
         user: 'foo',

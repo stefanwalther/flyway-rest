@@ -4,13 +4,11 @@ import * as config from './lib/config';
 
 describe( 'POST /clean', () => {
 
-  var server = null;
-
-  //console.log( 'Flyway Rest URL: ', config.FLYWAY_REST_URL, '\n' );
+  let server = null;
 
   before( () => {
 
-    var opts = {
+    let opts = {
       debug: false,
       url: config.FLYWAY_REST_URL
     };
@@ -29,38 +27,9 @@ describe( 'POST /clean', () => {
     return lib.healthCheck( server );
   } );
 
-  it( 'checks required params', () => {
-
-    return server
-      .post( '/clean' )
-      .expect( 500 );
-  } );
-
-  it( 'contains the correct action (if not set)', done => {
-
-    var args = {
-      mode: 'get-cmd',
-      flyway_args: {
-        user: 'foo',
-        password: 'bar',
-        url: 'baz'
-      }
-    };
-
-    server
-      .post( '/clean' )
-      .send( args )
-      .expect( 200 )
-      .end( ( err, res ) => {
-        expect( err ).to.not.exist;
-        expect( res.body.action ).to.be.equal( 'clean' );
-        done();
-      } )
-  } );
-
   it( 'properly cleans the db (user & pwd separate)', done => {
 
-    var args = {
+    let args = {
       mode: 'sync',
       flyway_args: {
         url: 'jdbc:postgresql://flyway_rest_db:5432/flyway',
@@ -77,50 +46,9 @@ describe( 'POST /clean', () => {
         expect( err ).to.not.exist;
         expect( res.body.stderr ).to.not.exist;
         expect( res.body.stdout ).to.exist;
+        expect( res.body.stdout ).to.have.property( 'stderr' ).to.be.empty;
         done();
       } )
   } );
 
-  it( 'returns a validation error if user and password are not set', done => {
-    var args = {
-      mode: 'sync',
-      flyway_args: {
-        url: 'jdbc:postgresql://flyway_rest_db:5432/foo'
-      }
-    };
-
-    server
-      .post( '/clean' )
-      .send( args )
-      .expect( 500 )
-      .end( ( err, res ) => {
-        expect( err ).to.not.exist;
-        expect( res.body.status ).to.equal( 'ValidationError' );
-        expect( res.body.errorMsg ).to.exist.and.to.be.equal( 'Validation of parameters failed.' );
-        expect( res.body.validationErrors ).to.contain( 'Argument user is mandatory.' );
-        done();
-      } )
-  } );
-
-  it( 'returns an error if the db is unknown', done => {
-    var args = {
-      mode: 'sync',
-      flyway_args: {
-        url: 'jdbc:postgresql://flyway_rest_db:5432/foo',
-        user: 'postgres',
-        password: 'postgres'
-      }
-    };
-
-    server
-      .post( '/clean' )
-      .send( args )
-      .expect( 500 )
-      .end( ( err, res ) => {
-        expect( err ).to.not.exist;
-        expect( res.body.stderr ).to.exist;
-        expect( res.body.stdout ).to.not.exist;
-        done();
-      } )
-  } )
 } );

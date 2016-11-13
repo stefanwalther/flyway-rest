@@ -6,13 +6,13 @@ import * as config from './lib/config';
 
 describe( 'POST /xx', () => {
 
-  var server = null;
+  let server = null;
 
   //console.log( 'Flyway Rest URL: ', config.FLYWAY_REST_URL, '\n' );
 
   before( () => {
 
-    var opts = {
+    let opts = {
       debug: false,
       url: config.FLYWAY_REST_URL
     };

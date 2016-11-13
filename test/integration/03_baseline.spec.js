@@ -4,13 +4,11 @@ import * as config from './lib/config';
 
 describe( 'POST /baseline', () => {
 
-  var server = null;
-
-  //console.log( 'Flyway Rest URL: ', FLYWAY_REST_URL, '\n' );
+  let server = null;
 
   before( () => {
 
-    var opts = {
+    let opts = {
       debug: false,
       url: config.FLYWAY_REST_URL
     };
@@ -32,15 +30,9 @@ describe( 'POST /baseline', () => {
 
   } );
 
-  it( 'checks required params', () => {
-    return server
-      .post( '/baseline' )
-      .expect( 500 );
-  } );
-
   it( 'does not require files', done => {
 
-    var args = {
+    let args = {
       mode: 'get-cmd',
       flyway_args: {
         url: 'jdbc:postgresql://flyway_rest_db:5432/flyway',

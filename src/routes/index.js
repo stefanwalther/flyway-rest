@@ -46,7 +46,6 @@ export default ( /*config*/ ) => { // eslint-disable-line no-inline-comments
     cmd.exec()
   );
 
-  //Todo: Should probably be a GET
   routes.post( '/info',
     validation.addParams( { action: 'info' } ),
     validation.validateParams(),

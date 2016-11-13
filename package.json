@@ -4,7 +4,10 @@
   "description": "REST interface for flyway.",
   "keywords": [
     "REST",
-    "flyway"
+    "flyway",
+    "flywaydb",
+    "database-migration",
+    "db-migration"
   ],
   "homepage": "https://github.com/stefanwalther/flyway-rest",
   "bugs": {
