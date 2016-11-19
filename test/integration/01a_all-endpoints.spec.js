@@ -98,7 +98,7 @@ function run( testDef ) {
       let args = {
         mode: 'sync',
         flyway_args: {
-          url: 'jdbc:postgresql://flyway_rest_db:5432/foo'
+          url: `jdbc:postgresql://${config.FLYWAY_REST_DB_HOST}:${config.FLYWAY_REST_DB_PORT}/flyway`
         }
       };
 
@@ -120,7 +120,7 @@ function run( testDef ) {
       let args = {
         mode: 'sync',
         flyway_args: {
-          url: 'jdbc:postgresql://flyway_rest_db:5432/foo',
+          url: `jdbc:postgresql://${config.FLYWAY_REST_DB_HOST}:${config.FLYWAY_REST_DB_PORT}/foo`,
           user: 'postgres',
           password: 'postgres'
         }

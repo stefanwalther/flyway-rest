@@ -35,7 +35,7 @@ describe( 'POST /baseline', () => {
     let args = {
       mode: 'get-cmd',
       flyway_args: {
-        url: 'jdbc:postgresql://flyway_rest_db:5432/flyway',
+        url: 'jdbc:postgresql://flyway-rest-db:5432/flyway',
         user: 'postgres',
         password: 'postgres'
       }
@@ -57,7 +57,7 @@ describe( 'POST /baseline', () => {
   //  var args = {
   //    mode: 'sync',
   //    flyway_args: {
-  //      url: `jdbc:postgresql://flyway_rest_db:5432/flyway`,
+  //      url: `jdbc:postgresql://flyway-rest-db:5432/flyway`,
   //      user: 'postgres',
   //      password: 'postgres'
   //    }

@@ -3,6 +3,6 @@ services:
 
   flyway-rest:
     extends:
-      file: ./docker/flyway_rest/docker-compose.yml
-      service: flyway_rest
+      file: ./docker/flyway-rest/docker-compose.yml
+      service: flyway-rest
 

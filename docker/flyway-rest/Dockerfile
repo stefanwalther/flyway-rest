@@ -1,4 +1,4 @@
-# flyway_rest
+# flyway-rest
 
 FROM java:8-jre
 

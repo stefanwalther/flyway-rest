@@ -1,11 +1,11 @@
 version: '2'
 services:
 
- flyway_rest_integration:
-    container_name: 'flyway_rest_integration'
+ flyway-rest-integration:
+    container_name: 'flyway-rest-integration'
     build:
       context: ./../../.
-      dockerfile: ./docker/flyway_rest_integration/Dockerfile
+      dockerfile: ./docker/flyway-rest-integration/Dockerfile
     environment:
       - FLYWAY_REST_PORT=9001
       - FLYWAY_REST_HOST=flyway-rest

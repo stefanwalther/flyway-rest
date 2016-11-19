@@ -1,28 +1,28 @@
 version: '2'
 services:
 
-  flyway_rest_db:
+  flyway-rest-db:
     extends:
-      file: ./flyway_rest_db/docker-compose.yml
-      service: flyway_rest_db
+      file: ./flyway-rest-db/docker-compose.yml
+      service: flyway-rest-db
 
   flyway-rest:
     extends:
       file: ./flyway-rest/docker-compose.yml
       service: flyway-rest
     links:
-      - flyway_rest_db
+      - flyway-rest-db
     volumes:
       - ./../:/home/app/
     command: "npm run start:dev"
     environment:
       - NODE_ENV=development
 
-  flyway_pgadmin:
-    container_name: "flyway_pgadmin"
+  flyway-pgadmin:
+    container_name: "flyway-pgadmin"
     image: fenglc/pgadmin4:1.1
     ports:
       - "5050:5050"
     links:
-      - flyway_rest_db
+      - flyway-rest-db
 

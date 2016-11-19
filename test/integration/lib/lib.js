@@ -61,7 +61,7 @@ export function getFiles( folderPath ) {
 
 /**
  * Configures the supertest agent.
- * By default it would connect to the flyway_rest docker container.
+ * By default it would connect to the flyway-rest docker container.
  *
  * If opts.debug is set to true (just meant to be used for debugging purposes), then the local
  * expressApp would be used. That makes it easier to locally debug the entire express app without

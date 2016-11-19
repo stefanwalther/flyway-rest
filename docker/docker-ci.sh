@@ -4,7 +4,7 @@ RED='\033[0;31m'
 GREEN='\033[0;32m'
 NC='\033[0m'
 COMPOSE_FILE='./docker/docker-compose.ci.yml'
-WAIT_FOR='flyway_rest_integration'
+WAIT_FOR='flyway-rest-integration'
 
 function cleanup () {
   docker-compose --file=${COMPOSE_FILE} -p ci kill
@@ -36,12 +36,12 @@ if [ $? -ne 0 ] ; then
 fi
 
 logInspect "flyway-rest"
-logInspect "flyway_rest_db"
-logInspect "flyway_rest_integration"
+logInspect "flyway-rest-db"
+logInspect "flyway-rest-integration"
 
 TEST_EXIT_CODE=`docker wait ${WAIT_FOR}`
 docker logs flyway-rest
-docker logs flyway_rest_integration
+docker logs flyway-rest-integration
 if [ -z ${TEST_EXIT_CODE+x} ] || [ "$TEST_EXIT_CODE" -ne 0 ]  ; then
   printf "${RED}Tests Failed${NC} - Exit Code: $TEST_EXIT_CODE\n"
 else

@@ -6,9 +6,6 @@ import * as config from './lib/config';
 describe( 'POST /repair', () => {
 
   let server = null;
-
-  //console.log( 'Flyway Rest URL: ', config.FLYWAY_REST_URL, '\n' );
-
   before( () => {
 
     let opts = {

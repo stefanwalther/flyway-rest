@@ -1,8 +1,8 @@
 version: '2'
 services:
 
-  flyway_rest_db:
-    container_name: 'flyway_rest_db'
+  flyway-rest-db:
+    container_name: 'flyway-rest-db'
     image: postgres:9.6
     ports:
       - 5432
