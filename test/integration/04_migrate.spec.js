@@ -8,8 +8,6 @@ describe( 'POST /migrate', () => {
 
   let server = null;
 
-  //console.log( 'Flyway Rest URL: ', config.FLYWAY_REST_URL, '\n' );
-
   before( () => {
 
     let opts = {
