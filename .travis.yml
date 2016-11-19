@@ -28,5 +28,8 @@ after_script:
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
     docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-    docker push stefanwalther/flyway-rest:latest;
+    Image="$(docker images | grep "^flyway-rest" | grep -v grep | awk '{print $3}')"
+    echo $Image
+    docker tag $Image stefanwalther/flyway-rest:latest
+    docker push stefanwalther/flyway-rest;
     fi

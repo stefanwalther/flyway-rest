@@ -7,7 +7,7 @@ services:
       context: ./../../.
       dockerfile: ./docker/flyway-rest/Dockerfile
     environment:
-      - PORT=9001
+      - PORT=9001doc
       - NODE_ENV=production
     ports:
       - "9001:9001"
