@@ -4,7 +4,7 @@ import fs from 'fs';
 import path from 'path';
 import ExpressServer from './../../../src/app-server';
 import supertest from 'supertest-as-promised';
-import _ from 'lodash';
+import * as config from './config';
 
 /**
  * Pings the server until a 200 is returned at the endpoint `health`
@@ -90,7 +90,7 @@ export function getBaseArgs() {
 
   return {
     flyway_args: {
-      url: 'jdbc:postgresql://flyway_rest_db:5432/flyway',
+      url: `jdbc:postgresql://${config.FLYWAY_REST_DB_HOST}:${config.FLYWAY_REST_DB_PORT}/flyway`,
       user: 'postgres',
       password: 'postgres'
     }
