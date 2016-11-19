@@ -11,10 +11,6 @@ function cleanup () {
   docker-compose --file=${COMPOSE_FILE} -p ci rm -f
 }
 
-function push() {
-
-}
-
 function logInspect( ) {
   name=$1
 
