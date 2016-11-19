@@ -6,6 +6,11 @@ import ExpressServer from './../../../src/app-server';
 import supertest from 'supertest-as-promised';
 import _ from 'lodash';
 
+/**
+ * Pings the server until a 200 is returned at the endpoint `health`
+ * @param server
+ * @returns {*}
+ */
 export function healthCheck( server ) {
 
   const check = () => {

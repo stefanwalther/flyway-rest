@@ -11,6 +11,10 @@ function cleanup () {
   docker-compose --file=${COMPOSE_FILE} -p ci rm -f
 }
 
+function push() {
+
+}
+
 function logInspect( ) {
   name=$1
 
@@ -46,6 +50,8 @@ if [ -z ${TEST_EXIT_CODE+x} ] || [ "$TEST_EXIT_CODE" -ne 0 ]  ; then
   printf "${RED}Tests Failed${NC} - Exit Code: $TEST_EXIT_CODE\n"
 else
   printf "${GREEN}Tests Passed in ${WAIT_FOR}${NC}\n\n"
+
+
 fi
 cleanup
 exit $TEST_EXIT_CODE
