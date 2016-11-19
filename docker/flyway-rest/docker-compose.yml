@@ -1,11 +1,11 @@
 version: '2'
 services:
 
-  flyway_rest:
-    container_name: 'flyway_rest'
+  flyway-rest:
+    container_name: 'flyway-rest'
     build:
       context: ./../../.
-      dockerfile: ./docker/flyway_rest/Dockerfile
+      dockerfile: ./docker/flyway-rest/Dockerfile
     environment:
       - PORT=9001
       - NODE_ENV=production

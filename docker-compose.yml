@@ -1,7 +1,7 @@
 version: '2'
 services:
 
-  flyway_rest:
+  flyway-rest:
     extends:
       file: ./docker/flyway_rest/docker-compose.yml
       service: flyway_rest
