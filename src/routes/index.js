@@ -20,7 +20,8 @@ export default ( /*config*/ ) => { // eslint-disable-line no-inline-comments
    * Endpoint to ping the server.
    */
   routes.get( '/health', ( req, res ) => {
-    res.status( 200 ).send( {} );
+    res.setHeader( "Content-Type", "application/json" );
+    res.send( { ts: new Date().toJSON() } );
   } );
 
   routes.get( '/info', ( req, res ) => {
