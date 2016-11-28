@@ -1,9 +1,17 @@
 ---
 swagger: '2.0'
+
+################################################################################
+#                              API Information                                 #
+################################################################################
 info:
   version: 0.0.2
   title: flyway-rest
   description: REST interface for flyway (http://flywaydb.org)
+
+################################################################################
+#                                   Paths                                      #
+################################################################################
 paths:
   /info:
     get:
@@ -24,27 +32,113 @@ paths:
             $ref: "#/definitions/configuration"
       responses:
         200:
-          description: OK
+          description: Result object for 200 OK
+          schema:
+            $ref: "#/definitions/result"
+        500:
+          description: Result object for 500 Error
+          schema:
+            $ref: "#/definitions/errorResult"
   /clean:
     post:
+      description: |
+        Clean ...
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: Configuration
+          description: Configuration object
+          required: true
+          schema:
+            $ref: "#/definitions/configuration"
       responses:
         200:
-          description: OK
+          description: Result object for 200 OK
+          schema:
+            $ref: "#/definitions/result"
+        500:
+          description: Result object for 500 Error
+          schema:
+            $ref: "#/definitions/errorResult"
   /migrate:
     post:
+      description: |
+        Clean ...
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: Configuration
+          description: Configuration object
+          required: true
+          schema:
+            $ref: "#/definitions/configuration"
       responses:
         200:
-          description: OK
+          description: Result object for 200 OK
+          schema:
+            $ref: "#/definitions/result"
+        500:
+          description: Result object for 500 Error
+          schema:
+            $ref: "#/definitions/errorResult"
   /repair:
     post:
+      description: |
+        Clean ...
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: Configuration
+          description: Configuration object
+          required: true
+          schema:
+            $ref: "#/definitions/configuration"
       responses:
         200:
-          description: OK
+          description: Result object for 200 OK
+          schema:
+            $ref: "#/definitions/result"
+        500:
+          description: Result object for 500 Error
+          schema:
+            $ref: "#/definitions/errorResult"
   /validate:
     post:
+      description: |
+        Clean ...
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: Configuration
+          description: Configuration object
+          required: true
+          schema:
+            $ref: "#/definitions/configuration"
       responses:
         200:
-          description: OK
+          description: Result object for 200 OK
+          schema:
+            $ref: "#/definitions/result"
+        500:
+          description: Result object for 500 Error
+          schema:
+            $ref: "#/definitions/errorResult"
+
+################################################################################
+#                                 Definitions                                  #
+################################################################################
 definitions:
   configuration:
     type: object
@@ -99,7 +193,22 @@ definitions:
         type: array
         items:
           $ref: "#/definitions/validationErrors"
+  errorResult:
+    properties:
+      status:
+        type: string
+        enum:
+          - Error
+          - ValidationError
+      errorMsg:
+        type: string
+      validationErrors:
+        type: array
+        items:
+          $ref: "#/definitions/validationErrors"
   validationErrors:
-    type: string
+    type: array
+    items:
+      type: string
 
 
