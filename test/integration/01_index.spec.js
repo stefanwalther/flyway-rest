@@ -53,20 +53,4 @@ describe( 'integration-tests:general', () => {
 
   } );
 
-  describe( 'POST /info', () => {
-    it( 'checks required params', () => {
-      return server
-        .post( '/info' )
-        .expect( 500 );
-    } )
-  } );
-
-  describe( 'POST /validate', () => {
-    it( 'checks required params', () => {
-      return server
-        .post( '/validate' )
-        .expect( 500 );
-    } )
-  } );
-
 } );

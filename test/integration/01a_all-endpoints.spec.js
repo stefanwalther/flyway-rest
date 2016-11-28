@@ -2,7 +2,6 @@
 import * as lib from './lib/lib';
 import * as config from './lib/config';
 
-
 describe( 'General tests for ', () => {
 
   let testDefs = [
@@ -78,9 +77,7 @@ function run( testDef ) {
           password: 'bar',
           url: 'baz'
         },
-        files: [
-
-        ]
+        files: []
       };
 
       server
@@ -103,7 +100,7 @@ function run( testDef ) {
       };
 
       server
-        .post( '/clean' )
+        .post( `/${testDef.endpoint}` )
         .send( args )
         .expect( 500 )
         .end( ( err, res ) => {
@@ -127,17 +124,42 @@ function run( testDef ) {
       };
 
       server
-        .post( '/clean' )
+        .post( `/${testDef.endpoint}` )
         .send( args )
         .expect( 500 )
         .end( ( err, res ) => {
           expect( err ).to.not.exist;
           expect( res.body.stdout ).to.not.exist;
           expect( res.body.stderr ).to.exist;
-          expect( res.body.stderr ).to.have.a.property('stderr').to.contain( 'FATAL: database "foo" does not exist' );
+          expect( res.body.stderr ).to.have.a.property( 'stderr' ).to.contain( 'FATAL: database "foo" does not exist' );
           done();
         } )
-    } )
+    } );
+
+    it.only( 'should return 500 if files are required, but not defined', done => {
+
+      let args = {
+        mode: 'sync',
+        flyway_args: {
+          url: `jdbc:postgresql://${config.FLYWAY_REST_DB_HOST}:${config.FLYWAY_REST_DB_PORT}/flyway`,
+          user: 'postgres',
+          password: 'postgres'
+        }
+      };
+
+      server.post( `/${testDef.endpoint}` )
+        .send( args )
+        .end( ( err, res ) => {
+          expect( err ).to.not.exist;
+          if ( testDef.requireFiles ) {
+            expect( res.statusCode ).to.be.equal( 500 );
+          } else {
+            expect( res.statusCode ).to.be.equal( 200 );
+          }
+          done();
+        } )
+
+    } );
 
   } )
 }
