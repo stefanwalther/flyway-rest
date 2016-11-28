@@ -30,11 +30,6 @@ export default ( /*config*/ ) => { // eslint-disable-line no-inline-comments
     } );
   } );
 
-  //Todo: Can probably be removed or replaced; no value in having that
-  routes.get( '/', ( req, res ) => {
-    res.sendStatus( 200 );
-  } );
-
   routes.post( '/migrate',
     validation.addParams( { action: 'migrate' } ),
     validation.validateParams(),

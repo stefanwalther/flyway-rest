@@ -1,9 +1,18 @@
 
+## Start the Development Environment
+
 ```sh
 $ docker-compose --f=./docker/docker-compose.dev.yml up --build
 ```
 
-## pgadmin
+This will spin up the following containers:
+
+- flyway_rest_db
+- flyway_rest
+- flyway_pgadmin
+
+
+### pgadmin
 
 [pgadmin](https://www.pgadmin.org/) is part of the development environment.  
 pgadmin can be opened at http://localhost:5050
