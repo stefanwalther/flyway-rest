@@ -120,7 +120,8 @@ function run( testDef ) {
           url: `jdbc:postgresql://${config.FLYWAY_REST_DB_HOST}:${config.FLYWAY_REST_DB_PORT}/foo`,
           user: 'postgres',
           password: 'postgres'
-        }
+        },
+        files: []
       };
 
       server
@@ -136,7 +137,7 @@ function run( testDef ) {
         } )
     } );
 
-    it.only( 'should return 500 if files are required, but not defined', done => {
+    it( 'should return 500 if files are required, but not defined', done => {
 
       let args = {
         mode: 'sync',
