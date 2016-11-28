@@ -25,10 +25,19 @@ export function validateParams() {
       validationErrors.push( 'Argument password is mandatory.' );
     }
 
-    // Check for files for all actions except
+    // Check for files:
+    //
+    //  CHECK
+    //  - migrate
+    //  - repair
+    //  - validate
+    //
+    //  NO CHECK
     //  - baseline
-    if ( req.body && [ 'migrate', 'info', 'validate', 'repair' ].indexOf( req.body.action ) > -1 ) {
-      if ( !req.body.files || !Array.isArray( req.body.files ) && !req.body.files.length <= 0 ) {
+    //  - clean
+    //  - info
+    if ( req.body && [ 'migrate', 'validate', 'repair' ].indexOf( req.body.action ) > -1 ) {
+      if ( !req.body.files || !Array.isArray( req.body.files )) {
         validationErrors.push( 'Action requires files.' );
       }
     }
