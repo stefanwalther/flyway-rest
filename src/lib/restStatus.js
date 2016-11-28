@@ -1,1 +1,0 @@
-// Rest Status helper lib

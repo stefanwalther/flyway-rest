@@ -42,7 +42,6 @@ export function validateParams() {
       }
     }
 
-    // Todo: Generalize restStatus
     if ( validationErrors.length > 0 ) {
       res.status( 500 );
       res.json( {

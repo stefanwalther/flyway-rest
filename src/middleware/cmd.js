@@ -40,7 +40,6 @@ export function exec() {
       finish( next );
     }
 
-    //Todo: Potentially break out to ./lib/restStatus.js
     function finish( next ) {
 
       // Todo: Could be necessary to catch any errors here (see manual for `tmp`)
@@ -56,6 +55,13 @@ export function exec() {
 
 }
 
+/**
+ * Create the command string to be passed over to FlywayDb.
+ * @param {object} flyWayArgs - All flyway arguments will be automatically added to the flyway command.
+ * @param {string} action - Flyway action, can be one of: 'clean', 'info', 'validate', 'baseline', 'repair', 'migrate'.
+ * @param {string} locations - Where to find the migration files (.sql files)
+ * @returns {string} - The command.
+ */
 export function buildCommand( flyWayArgs, action = 'info', locations ) {
 
   if ( !flyWayArgs || ( typeof flyWayArgs === 'object' && Object.keys( flyWayArgs ).length < 1 ) ) {
@@ -85,6 +91,7 @@ export function buildCommand( flyWayArgs, action = 'info', locations ) {
 
 /**
  * Extract (decode) the array of base64 encoded files to a temporary directory.
+ *
  * @param filesObj
  * @returns {*}
  */
