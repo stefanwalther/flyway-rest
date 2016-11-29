@@ -1,5 +1,5 @@
 /* eslint-disable no-inline-comments */
-/*global describe, it, afterEach, before, beforeEach*/
+/*global describe, it, after, afterEach, before, beforeEach*/
 /* eslint-enable no-inline-comments */
 import * as lib from './lib/lib';
 import * as config from './lib/config';
@@ -31,7 +31,6 @@ describe( 'integration-tests:general', () => {
     return lib.healthCheck( server );
   } );
 
-
   describe( 'general setup', () => {
 
     // Should probably just redirect to /openapi
@@ -41,14 +40,6 @@ describe( 'integration-tests:general', () => {
         .get( '/' )
         .expect( 200 )
 
-    } );
-
-    //Todo: extend that check
-    xit( '/ should return some general pkg information', done => {
-      server
-        .get( '/' )
-        .set( 'Accept', 'application/json' )
-        .expect( 200, done );
     } );
 
   } );

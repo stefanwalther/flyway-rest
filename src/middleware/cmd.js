@@ -102,7 +102,7 @@ export function extractFiles( filesObj ) {
     tmpDirObj = tmp.dirSync( { unsafeCleanup: true } );
     console.log( tmpDirObj, tmpDirObj );
     filesObj.forEach( fileDef => {
-      base64.decode( fileDef.base64, path.join( tmpDirObj.name, fileDef.name ) );
+      base64.decodeFile( fileDef.base64, path.join( tmpDirObj.name, fileDef.name ) );
     } );
     return tmpDirObj;
   }

@@ -3,20 +3,21 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import routes from './routes';
 import defaultConfig from './config.json';
+import Logger from './lib/logger';
 
 /**
  * appServer
  */
 export default class appServer {
   constructor() {
-    this.init();
+    this._init();
+    this.logger = new Logger();
   }
 
   /**
    * Initialize the express server.
-   * Todo: Should be an internal method
    */
-  init() {
+  _init() {
     this.expressApp = express();
 
     this.expressApp.use( cors( {
@@ -40,9 +41,9 @@ export default class appServer {
       let port = process.env.PORT || defaultConfig.port;
       this.server = this.expressApp.listen( port, ( err ) => {
         if ( !err ) {
-          console.log( `Started on port ${port}.` );
+          this.logger.info( `Started on port ${port}.` );
         } else {
-          console.log( 'Cannot start server.', err );
+          this.logger.error( 'Cannot start server.', err );
         }
         return done();
       } );

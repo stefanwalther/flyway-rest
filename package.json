@@ -25,13 +25,14 @@
   "main": "./dist/index.js",
   "repository": "stefanwalther/flyway-rest",
   "scripts": {
-    "docker-compose-dev": "docker-compose --f ./docker/docker-compose.dev.yml up",
+    "docker-compose-dev-up": "docker-compose --f ./docker/docker-compose.dev.yml up",
+    "docker-compose-dev-down": "docker-compose --f ./docker/docker-compose.dev.yml down",
     "prestart": "npm run build",
     "start": "npm run serve",
     "start:dev": "nodemon --watch src --exec npm start",
     "build": "gulp build",
     "serve": "node ./dist/index.js && npm run postserve",
-    "postserve": "rm ./.v8flags.*.json",
+    "postserve": "rimraf ./.v8flags.*.json",
     "coverage": "babel-node ./node_modules/.bin/isparta cover _mocha",
     "docs": "verb",
     "lint": "eslint src",
@@ -46,7 +47,8 @@
     "execa": "^0.5.0",
     "express": "^4.14.0",
     "lodash": "^4.16.6",
-    "tmp": "0.0.30"
+    "tmp": "0.0.30",
+    "winston": "^2.3.0"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
@@ -67,7 +69,9 @@
     "promise-retry": "^1.1.1",
     "supertest": "^2.0.1",
     "supertest-as-promised": "^4.0.2",
-    "yargs": "^6.3.0"
+    "yargs": "^6.3.0",
+    "massive": "^2.5.0",
+    "winston": "^2.2.0"
   },
   "engines": {
     "node": ">=0.12.0"

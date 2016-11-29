@@ -1,9 +1,4 @@
-export function addParams( params ) {
-  return function( req, res, next ) {
-    Object.assign( req.body, params );
-    return next();
-  }
-}
+
 
 export function validateParams() {
   return function( req, res, next ) {

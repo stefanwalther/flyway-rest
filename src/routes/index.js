@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import * as validation from './../middleware/validation';
+import * as helpers from './../middleware/helpers';
 import * as cmd from './../middleware/cmd';
 import pkg from './../../package.json';
 
@@ -31,37 +32,37 @@ export default ( /*config*/ ) => { // eslint-disable-line no-inline-comments
   } );
 
   routes.post( '/migrate',
-    validation.addParams( { action: 'migrate' } ),
+    helpers.addParams( { action: 'migrate' } ),
     validation.validateParams(),
     cmd.exec()
   );
 
   routes.post( '/clean',
-    validation.addParams( { action: 'clean' } ),
+    helpers.addParams( { action: 'clean' } ),
     validation.validateParams(),
     cmd.exec()
   );
 
   routes.post( '/info',
-    validation.addParams( { action: 'info' } ),
+    helpers.addParams( { action: 'info' } ),
     validation.validateParams(),
     cmd.exec()
   );
 
   routes.post( '/validate',
-    validation.addParams( { action: 'validate' } ),
+    helpers.addParams( { action: 'validate' } ),
     validation.validateParams(),
     cmd.exec()
   );
 
   routes.post( '/baseline',
-    validation.addParams( { action: 'baseline' } ),
+    helpers.addParams( { action: 'baseline' } ),
     validation.validateParams(),
     cmd.exec()
   );
 
   routes.post( '/repair',
-    validation.addParams( { action: 'repair' } ),
+    helpers.addParams( { action: 'repair' } ),
     validation.validateParams(),
     cmd.exec()
   );

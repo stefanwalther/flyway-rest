@@ -2,11 +2,13 @@ version: '2'
 services:
 
   flyway-rest-db:
+    container-name: 'flyway-rest-db'
     extends:
       file: ./flyway-rest-db/docker-compose.yml
       service: flyway-rest-db
 
   flyway-rest:
+    container_name: 'flyway-rest'
     extends:
       file: ./flyway-rest/docker-compose.yml
       service: flyway-rest
@@ -14,6 +16,7 @@ services:
       - flyway-rest-db
 
   flyway-rest-integration:
+    container_name: 'flyway-rest-integration'
     extends:
       file: ./flyway-rest-integration/docker-compose.yml
       service: flyway-rest-integration

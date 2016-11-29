@@ -51,13 +51,18 @@ export function getFiles( folderPath ) {
   files.forEach( file => {
     let f = {
       name: file,
-      base64: base64.encode( path.join( folderPath, file ) ),
+      base64: base64.encodeFile( path.join( folderPath, file ) ),
     };
     r.push( f );
   } );
   return r;
-
 }
+
+/**
+ * @typedef connectOpts
+ * @param {boolean} debug - Whether to enable the debug mode.
+ * @param {string} url - The url of the REST server.
+ */
 
 /**
  * Configures the supertest agent.
@@ -67,6 +72,8 @@ export function getFiles( folderPath ) {
  * expressApp would be used. That makes it easier to locally debug the entire express app without
  * having to debug inside the containers (with e.g. node-inspector)
  *
+ * @param {connectOpts} opts - Connect options
+ * @return {Promise}
  */
 export function connect( opts ) {
 
