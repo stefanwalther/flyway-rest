@@ -3,7 +3,7 @@
 <!-- see https://github.com/pando85/cherrymusic/blob/devel-django/docs/api/v1/index.md -->
 
 All endpoints share the same parameters.
-All endpoints are also described in an OpenAPI definition file (swagger), which can be accessed at http://<server-name>:<port>/api-docs/
+All endpoints are also described in an OpenAPI definition file (swagger), which can be accessed at http://{server-name}:{port}/api-docs/
 
 ### Parameters
 

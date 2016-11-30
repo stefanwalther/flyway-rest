@@ -9,7 +9,7 @@ $ npm install superagent --save
 ```js
 import superagent from 'superagent'
 
-const url = '';
+const url = 'http://localhost:9001';
 let args = {
   
 };
@@ -17,7 +17,11 @@ let args = {
 superagent( url )
   .post( '/clean` )
   .send( 'args' )
-  ;
+  .end( (err, res) => {
+
+    // Database has been cleaned
+
+  });
   
 ```
 

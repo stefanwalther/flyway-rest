@@ -1,7 +1,7 @@
 ### Run docker container
 
 ```sh
-docker run
+docker pull flyway-rest
 ```
 
 ### Run the development environment:

@@ -1,13 +1,13 @@
 {
   "name": "flyway-rest",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "REST interface for flyway.",
   "keywords": [
     "REST",
-    "flyway",
-    "flywaydb",
     "database-migration",
-    "db-migration"
+    "db-migration",
+    "flyway",
+    "flywaydb"
   ],
   "homepage": "https://github.com/stefanwalther/flyway-rest",
   "bugs": {
@@ -25,18 +25,18 @@
   "main": "./dist/index.js",
   "repository": "stefanwalther/flyway-rest",
   "scripts": {
-    "docker-compose-dev-up": "docker-compose --f ./docker/docker-compose.dev.yml up",
-    "docker-compose-dev-down": "docker-compose --f ./docker/docker-compose.dev.yml down",
-    "prestart": "npm run build",
-    "start": "npm run serve",
-    "start:dev": "nodemon --watch src --exec npm start",
     "build": "gulp build",
-    "serve": "node ./dist/index.js && npm run postserve",
-    "postserve": "rimraf ./.v8flags.*.json",
     "coverage": "babel-node ./node_modules/.bin/isparta cover _mocha",
+    "docker-compose-dev-down": "docker-compose --f ./docker/docker-compose.dev.yml down",
+    "docker-compose-dev-up": "docker-compose --f ./docker/docker-compose.dev.yml up",
     "docs": "verb",
     "lint": "eslint src",
     "lint:test": "eslint test",
+    "serve": "node ./dist/index.js && npm run postserve",
+    "postserve": "rimraf ./.v8flags.*.json",
+    "prestart": "npm run build",
+    "start": "npm run build && npm run serve",
+    "start:dev": "nodemon --watch src --exec npm start",
     "test": "npm run test:unit && npm run test:integration",
     "test:integration": "mocha './test/integration/**/*.spec.js' --compilers js:babel-core/register --require './test/mocha.conf.js' --timeout 10000",
     "test:unit": "mocha './test/unit/**/*.spec.js' --compilers js:babel-core/register --require './test/mocha.conf.js'"
@@ -47,8 +47,9 @@
     "execa": "^0.5.0",
     "express": "^4.14.0",
     "lodash": "^4.16.6",
+    "swagger-express-middleware": "^1.0.0-alpha.12",
     "tmp": "0.0.30",
-    "winston": "^2.3.0"
+    "winster": "^0.1.1"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
@@ -64,14 +65,13 @@
     "gulp-babel": "^6.1.2",
     "gulp-format-md": "*",
     "gulp-sourcemaps": "^2.2.0",
+    "massive": "^2.5.0",
     "mocha": "*",
     "nyc": "^8.3.2",
     "promise-retry": "^1.1.1",
     "supertest": "^2.0.1",
     "supertest-as-promised": "^4.0.2",
-    "yargs": "^6.3.0",
-    "massive": "^2.5.0",
-    "winston": "^2.2.0"
+    "yargs": "^6.3.0"
   },
   "engines": {
     "node": ">=0.12.0"

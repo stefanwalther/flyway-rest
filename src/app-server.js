@@ -3,7 +3,8 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import routes from './routes';
 import defaultConfig from './config.json';
-import Logger from './lib/logger';
+import winster from 'winster';
+
 
 /**
  * appServer
@@ -11,7 +12,7 @@ import Logger from './lib/logger';
 export default class appServer {
   constructor() {
     this._init();
-    this.logger = new Logger();
+    this.logger = new winster();
   }
 
   /**
@@ -27,6 +28,8 @@ export default class appServer {
     this.expressApp.use( bodyParser.json( {
       limit: defaultConfig.bodyLimit
     } ) );
+
+    this.expressApp.use('/api-docs', express.static('./api-docs.yaml'));
 
     this.expressApp.use( routes( defaultConfig ) );
 
