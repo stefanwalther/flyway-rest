@@ -29,7 +29,7 @@ export default class appServer {
       limit: defaultConfig.bodyLimit
     } ) );
 
-    this.expressApp.use('/api-docs', express.static('./api-docs.yaml'));
+    //this.expressApp.use('/api-docs', express.static('./api-docs.yaml'));
 
     this.expressApp.use( routes( defaultConfig ) );
 
