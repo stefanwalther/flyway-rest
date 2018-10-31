@@ -7,7 +7,7 @@
 ### Run docker container
 
 ```sh
-docker run
+docker pull flyway-rest
 ```
 
 ### Run the development environment:
@@ -25,7 +25,7 @@ $ docker-comose up --f=./docker/docker-compose.dev.yml up
 <!-- see https://github.com/pando85/cherrymusic/blob/devel-django/docs/api/v1/index.md -->
 
 All endpoints share the same parameters.
-All endpoints are also described in an OpenAPI definition file (swagger), which can be accessed at http://<server-name>:<port>/api-docs/
+All endpoints are also described in an OpenAPI definition file (swagger), which can be accessed at http://{server-name}:{port}/api-docs/
 
 ### Parameters
 
@@ -61,7 +61,7 @@ $ npm install superagent --save
 ```js
 import superagent from 'superagent'
 
-const url = '';
+const url = 'http://localhost:9001';
 let args = {
   
 };
@@ -69,7 +69,11 @@ let args = {
 superagent( url )
   .post( '/clean` )
   .send( 'args' )
-  ;
+  .end( (err, res) => {
+
+    // Database has been cleaned
+
+  });
   
 ```
 

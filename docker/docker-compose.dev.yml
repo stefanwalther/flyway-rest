@@ -17,6 +17,8 @@ services:
     volumes:
       - ./../:/home/app/
     command: "npm run start:dev"
+    ports:
+      - "9001:9001"
     environment:
       - NODE_ENV=development
 

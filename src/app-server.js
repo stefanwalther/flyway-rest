@@ -3,7 +3,7 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import routes from './routes';
 import defaultConfig from './config.json';
-import winster from 'winster';
+const Winster = require('winster');
 
 
 /**
@@ -12,7 +12,7 @@ import winster from 'winster';
 export default class appServer {
   constructor() {
     this._init();
-    this.logger = new winster();
+    this.logger = Winster.instance();
   }
 
   /**

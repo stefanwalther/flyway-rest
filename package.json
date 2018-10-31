@@ -29,7 +29,6 @@
     "coverage": "babel-node ./node_modules/.bin/isparta cover _mocha",
     "docker-compose-dev-down": "docker-compose --f ./docker/docker-compose.dev.yml down",
     "docker-compose-dev-up": "docker-compose --f ./docker/docker-compose.dev.yml up",
-    "docs": "verb",
     "lint": "eslint src",
     "lint:test": "eslint test",
     "serve": "node ./dist/index.js && npm run postserve",
@@ -48,7 +47,8 @@
     "express": "^4.14.0",
     "lodash": "^4.16.6",
     "swagger-express-middleware": "^1.0.0-alpha.12",
-    "tmp": "0.0.30"
+    "tmp": "0.0.30",
+    "winster": "^0.2.13"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
