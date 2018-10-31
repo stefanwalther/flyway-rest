@@ -1,4 +1,6 @@
-# flyway-rest[![Build Status](https://travis-ci.org/stefanwalther/flyway-rest.svg?branch=master)](https://travis-ci.org/stefanwalther/flyway-rest) [![npm version](https://badge.fury.io/js/flyway-rest.svg)](https://www.npmjs.com/package/flyway-rest) [![Dependency Status](https://david-dm.org/stefanwalther/flyway-rest.svg)](https://david-dm.org/stefanwalther/flyway-rest)
+# flyway-rest
+
+[![Build Status](https://travis-ci.org/stefanwalther/flyway-rest.svg?branch=master)](https://travis-ci.org/stefanwalther/flyway-rest)
 
 > REST interface for flyway.
 
