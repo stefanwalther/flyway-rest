@@ -2,4 +2,3 @@
   - [ ] container flyway-rest-integration should not execute unit tests
 - [ ] Container optimization
   - [ ] No need to do the full install on flyway-rest-integration; could use only a subset of devDependencies
-- [ ] nodemon should not be part of the official image
