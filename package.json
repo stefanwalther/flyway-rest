@@ -46,7 +46,7 @@
     "execa": "^0.5.0",
     "express": "^4.14.0",
     "lodash": "^4.16.6",
-    "swagger-express-middleware": "^1.0.0-alpha.12",
+    "swagger-express-middleware": "^2.0.0",
     "tmp": "0.0.30",
     "winster": "^0.2.13"
   },
