@@ -47,7 +47,7 @@
     "express": "^4.14.0",
     "lodash": "^4.16.6",
     "swagger-express-middleware": "^1.0.0-alpha.12",
-    "tmp": "0.0.30",
+    "tmp": "0.2.1",
     "winster": "^0.2.13"
   },
   "devDependencies": {
