@@ -1,5 +1,5 @@
 # Context is ./../../ - so the root the the project
-FROM mhart/alpine-node:6.9.1
+FROM mhart/alpine-node:6.17.1
 
 # Install bash
 #RUN apk add --update bash && rm -rf /var/cache/apk/*
