@@ -58,7 +58,7 @@
     "chai": "^3.5.0",
     "del": "^2.2.2",
     "eslint": "^3.9.1",
-    "eslint-config-idiomatic": "^2.1.0",
+    "eslint-config-idiomatic": "^4.0.0",
     "eslint-plugin-mocha": "^4.7.0",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
